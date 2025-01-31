@@ -1,0 +1,220 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="AutoImportSettings">
+    <option name="autoReloadType" value="SELECTIVE" />
+  </component>
+  <component name="ChangeListManager">
+    <list default="true" id="5f4c1205-9544-43d9-ae34-6bc9ae1b8650" name="Changes" comment="">
+      <change afterPath="$PROJECT_DIR$/.gitignore" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.idea/encodings.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.idea/uiDesigner.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.idea/vcs.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/data-processor/src/main/java/com/dynamischrijbaansysteem/data/MongoDBConnection.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/data-processor/src/main/java/com/dynamischrijbaansysteem/data/TrafficDataService.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/data-processor/src/main/resources/logback.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/data-processor/src/test/java/com/dynamischrijbaansysteem/data/MongoDBConnectionTest.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/dynamic-lane-logic/src/main/java/com/dynamischrijbaansysteem/LaneManager.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/dynamic-lane-logic/src/test/java/com/dynamischrijbaansysteem/LaneManagerTest.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/gui/src/main/java/com/dynamischrijbaansysteem/MainApp.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/pom.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/traffic-simulator/src/main/java/com/dynamischrijbaansysteem/TrafficSimulator.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/traffic-simulator/src/test/java/com/dynamischrijbaansysteem/LaneManagerTest.java" afterDir="false" />
+    </list>
+    <option name="SHOW_DIALOG" value="false" />
+    <option name="HIGHLIGHT_CONFLICTS" value="true" />
+    <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
+    <option name="LAST_RESOLUTION" value="IGNORE" />
+  </component>
+  <component name="FileTemplateManagerImpl">
+    <option name="RECENT_TEMPLATES">
+      <list>
+        <option value="Class" />
+      </list>
+    </option>
+  </component>
+  <component name="Git.Settings">
+    <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
+  </component>
+  <component name="ProjectColorInfo">{
+  &quot;associatedIndex&quot;: 3
+}</component>
+  <component name="ProjectId" id="2s2N9VWgmP5LPHC3HrKKmG4ZwGt" />
+  <component name="ProjectLevelVcsManager" settingsEditedManually="true">
+    <ConfirmationsSetting value="2" id="Add" />
+  </component>
+  <component name="ProjectViewState">
+    <option name="hideEmptyMiddlePackages" value="true" />
+    <option name="showLibraryContents" value="true" />
+  </component>
+  <component name="PropertiesComponent"><![CDATA[{
+  "keyToString": {
+    "Application.MainApp.executor": "Run",
+    "Application.MongoDBConnection.executor": "Run",
+    "Application.TrafficSimulator.executor": "Debug",
+    "JUnit.LaneManagerTest (1).executor": "Run",
+    "JUnit.LaneManagerTest,testOpenExtraLane and 2 more.executor": "Debug",
+    "JUnit.LaneManagerTest.executor": "Debug",
+    "JUnit.LaneManagerTest.testOpenExtraLane.executor": "Run",
+    "JUnit.MongoDBConnectionTest.executor": "Run",
+    "JUnit.MongoDBConnectionTest.testInsertAndRetrieve.executor": "Run",
+    "Maven. [org.apache.maven.plugins:maven-archetype-plugin:RELEASE:generate].executor": "Run",
+    "RunOnceActivity.OpenProjectViewOnStart": "true",
+    "RunOnceActivity.ShowReadmeOnStart": "true",
+    "SHARE_PROJECT_CONFIGURATION_FILES": "true",
+    "git-widget-placeholder": "master",
+    "kotlin-language-version-configured": "true",
+    "node.js.detected.package.eslint": "true",
+    "node.js.detected.package.tslint": "true",
+    "node.js.selected.package.eslint": "(autodetect)",
+    "node.js.selected.package.tslint": "(autodetect)",
+    "nodejs_package_manager_path": "npm",
+    "project.structure.last.edited": "Project",
+    "project.structure.proportion": "0.0",
+    "project.structure.side.proportion": "0.0",
+    "settings.editor.selected.configurable": "MavenSettings",
+    "vue.rearranger.settings.migration": "true"
+  }
+}]]></component>
+  <component name="RunManager" selected="Application.MainApp">
+    <configuration name="MainApp" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
+      <option name="MAIN_CLASS_NAME" value="com.dynamischrijbaansysteem.MainApp" />
+      <module name="gui" />
+      <option name="VM_PARAMETERS" value="--module-path C:\CBW-Programs\javafx-sdk-17.0.2\lib --add-modules javafx.controls,javafx.fxml " />
+      <extension name="coverage">
+        <pattern>
+          <option name="PATTERN" value="com.dynamischrijbaansysteem.*" />
+          <option name="ENABLED" value="true" />
+        </pattern>
+      </extension>
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="TrafficSimulator" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
+      <option name="MAIN_CLASS_NAME" value="com.dynamischrijbaansysteem.TrafficSimulator" />
+      <module name="traffic-simulator" />
+      <extension name="coverage">
+        <pattern>
+          <option name="PATTERN" value="com.dynamischrijbaansysteem.*" />
+          <option name="ENABLED" value="true" />
+        </pattern>
+      </extension>
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="LaneManagerTest (1)" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+      <module name="traffic-simulator" />
+      <extension name="coverage">
+        <pattern>
+          <option name="PATTERN" value="com.dynamischrijbaansysteem.*" />
+          <option name="ENABLED" value="true" />
+        </pattern>
+      </extension>
+      <option name="PACKAGE_NAME" value="com.dynamischrijbaansysteem" />
+      <option name="MAIN_CLASS_NAME" value="com.dynamischrijbaansysteem.LaneManagerTest" />
+      <option name="TEST_OBJECT" value="class" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="LaneManagerTest" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+      <module name="dynamic-lane-logic" />
+      <extension name="coverage">
+        <pattern>
+          <option name="PATTERN" value="com.dynamischrijbaansysteem.*" />
+          <option name="ENABLED" value="true" />
+        </pattern>
+      </extension>
+      <option name="PACKAGE_NAME" value="com.dynamischrijbaansysteem" />
+      <option name="MAIN_CLASS_NAME" value="com.dynamischrijbaansysteem.LaneManagerTest" />
+      <option name="TEST_OBJECT" value="class" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="LaneManagerTest,testOpenExtraLane and 2 more" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+      <module name="dynamic-lane-logic" />
+      <option name="TEST_OBJECT" value="pattern" />
+      <patterns>
+        <pattern testClass="com.dynamischrijbaansysteem.LaneManagerTest,testOpenExtraLane" />
+        <pattern testClass="com.dynamischrijbaansysteem.LaneManagerTest,testCloseExtraLane" />
+        <pattern testClass="com.dynamischrijbaansysteem.LaneManagerTest,testKeepLaneSame" />
+      </patterns>
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <list>
+      <item itemvalue="Application.MainApp" />
+      <item itemvalue="Application.TrafficSimulator" />
+      <item itemvalue="JUnit.LaneManagerTest" />
+      <item itemvalue="JUnit.LaneManagerTest,testOpenExtraLane and 2 more" />
+      <item itemvalue="JUnit.LaneManagerTest (1)" />
+    </list>
+    <recent_temporary>
+      <list>
+        <item itemvalue="Application.MainApp" />
+        <item itemvalue="Application.TrafficSimulator" />
+        <item itemvalue="JUnit.LaneManagerTest (1)" />
+        <item itemvalue="JUnit.LaneManagerTest" />
+        <item itemvalue="JUnit.LaneManagerTest,testOpenExtraLane and 2 more" />
+      </list>
+    </recent_temporary>
+  </component>
+  <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="application-level" UseSingleDictionary="true" transferred="true" />
+  <component name="TaskManager">
+    <task active="true" id="Default" summary="Default task">
+      <changelist id="5f4c1205-9544-43d9-ae34-6bc9ae1b8650" name="Changes" comment="" />
+      <created>1737649560609</created>
+      <option name="number" value="Default" />
+      <option name="presentableId" value="Default" />
+      <updated>1737649560609</updated>
+      <workItem from="1737649561756" duration="2950000" />
+      <workItem from="1737988492914" duration="7758000" />
+      <workItem from="1738055579119" duration="25241000" />
+    </task>
+    <servers />
+  </component>
+  <component name="TypeScriptGeneratedFilesManager">
+    <option name="version" value="3" />
+  </component>
+  <component name="Vcs.Log.Tabs.Properties">
+    <option name="OPEN_GENERIC_TABS">
+      <map>
+        <entry key="84192cf3-6055-4e64-b723-fd276aec16ba" value="TOOL_WINDOW" />
+      </map>
+    </option>
+    <option name="TAB_STATES">
+      <map>
+        <entry key="84192cf3-6055-4e64-b723-fd276aec16ba">
+          <value>
+            <State>
+              <option name="FILTERS">
+                <map>
+                  <entry key="branch">
+                    <value>
+                      <list>
+                        <option value="HEAD" />
+                      </list>
+                    </value>
+                  </entry>
+                  <entry key="roots">
+                    <value>
+                      <list>
+                        <option value="$PROJECT_DIR$" />
+                      </list>
+                    </value>
+                  </entry>
+                </map>
+              </option>
+              <option name="SHOW_ONLY_AFFECTED_CHANGES" value="true" />
+            </State>
+          </value>
+        </entry>
+      </map>
+    </option>
+  </component>
+</project>
