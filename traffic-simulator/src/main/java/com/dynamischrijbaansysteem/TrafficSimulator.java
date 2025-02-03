@@ -1,13 +1,13 @@
 package com.dynamischrijbaansysteem;
-import com.dynamischrijbaansysteem.data.TrafficDataService;
+import com.dynamischrijbaansysteem.data.TrafficDensityService;
 import java.util.Random;
 public class TrafficSimulator {
 
-    private final TrafficDataService trafficDataService;
+    private final TrafficDensityService trafficDensityService;
     private final Random random;
 
     public TrafficSimulator () {
-        this.trafficDataService = new TrafficDataService();
+        this.trafficDensityService = new TrafficDensityService();
         this.random = new Random();
     }
 
@@ -17,7 +17,10 @@ public class TrafficSimulator {
     public void generateTrafficData() {
         String location = "A1 Highway";
         int density = random.nextInt(101);
-        trafficDataService.insertTrafficData(location,density);
+        int laneId = random.nextInt(3);
+
+        // TO DO misschien uitbreiden dat density van lanes tegelijk veranderen ipv 1 per keer
+        trafficDensityService.insertTrafficDensity(laneId,density);
 
         System.out.println("🚦 Nieuwe verkeersdata gegenereerd: " + location + " -> " + density + "%");
     }
