@@ -4,22 +4,32 @@ import com.mongodb.client.MongoCollection;
 import com.mongodb.client.MongoDatabase;
 import org.bson.Document;
 
-public class TrafficDataService {
+public class TrafficDensityService {
 
     private final MongoCollection<Document> collection;
 
-    public TrafficDataService() {
+    public TrafficDensityService() {
         MongoDatabase database = MongoDBConnection.getDatabase();
-        this.collection = database.getCollection("traffic");
+        this.collection = database.getCollection("traffic_data");
     }
 
-    public void insertTrafficData(String location, int density) {
+   public int getTrafficDensity(int laneId){
+        Document latestData = collection.find(new Document("laneId", laneId))
+                .sort(new Document("timestamp", -1))
+                .first();
+        if (latestData != null) {
+            return latestData.getInteger("density",0);
+        }
+        return 0;
+   }
+
+   public void insertTrafficDensity(int laneId, int density){
         Document document = new Document()
-                .append("location", location)
+                .append("laneId", laneId)
                 .append("density", density)
                 .append("timestamp", System.currentTimeMillis());
         collection.insertOne(document);
-    }
+   }
 
     public void getTrafficData() {
         for (Document doc : collection.find()){

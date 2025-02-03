@@ -5,14 +5,21 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 
 public class MongoDBConnectionTest {
     @Test
-    public void testInsertAndRetrieve() {
-       TrafficDataService service = new TrafficDataService();
-
+    public void testInsertAndRetrieveTrafficData() {
+       TrafficDensityService trafficDensityService = new TrafficDensityService();
        // voeg testdata toe
-        service.insertTrafficData("A1 Highway", 85);
-
+        trafficDensityService.insertTrafficDensity(1, 85);
         //haal data op en toon deze
-        service.getTrafficData();
+        trafficDensityService.getTrafficData();
+    }
+
+    @Test
+    public void testInsertAndRetrieveLanes(){
+       LaneService laneService = new LaneService();
+        // voeg testdata toe
+       laneService.insertLane(1,"A1 Highway");
+        //haal data op en toon deze
+       laneService.getLanes();
     }
 
 }
