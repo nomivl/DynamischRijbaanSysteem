@@ -1,6 +1,8 @@
-package com.dynamischrijbaansysteem.data;
+package com.dynamischrijbaansysteem;
 import com.dynamischrijbaansysteem.Lane;
 import com.dynamischrijbaansysteem.LaneStatus;
+import com.dynamischrijbaansysteem.data.LaneService;
+import com.dynamischrijbaansysteem.data.TrafficDensityService;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -8,9 +10,9 @@ import java.util.List;
 public class LaneStatusService {
     private final LaneService laneService;
     private final TrafficDensityService trafficDensityService;
-    public LaneStatusService() {
-        this.laneService = new LaneService();
-        this.trafficDensityService = new TrafficDensityService();
+    public LaneStatusService(LaneService laneservice, TrafficDensityService trafficDensityService) {
+        this.laneService = laneservice;
+        this.trafficDensityService = trafficDensityService;
     }
 
     /**
@@ -19,13 +21,11 @@ public class LaneStatusService {
      * @param trafficDensity De verkeersdichtheid (0-100%).
      * @return De aanbevolen actie: extra rijbaan openen, sluiten of niets doen.
      */
-    public LaneStatus determineLaneStatus(int trafficDensity){
-        if (trafficDensity > 80) {
+    public LaneStatus determineExtraLaneStatus(int trafficDensity){
+        if (trafficDensity > 70) {
             return LaneStatus.OPEN_EXTRA_LANE;
-        } else if (trafficDensity < 30) {
-            return LaneStatus.CLOSE_EXTRA_LANE;
         } else {
-            return LaneStatus.KEEP_LANES_SAME;
+            return LaneStatus.CLOSE_EXTRA_LANE;
         }
     }
 
@@ -34,8 +34,16 @@ public class LaneStatusService {
         for (Lane lane : lanes) {
             int density = trafficDensityService.getTrafficDensity(lane.getLaneId());
             lane.setDensity(density);
-            lane.setLaneStatus(determineLaneStatus(density));
+            lane.setLaneStatus(determineExtraLaneStatus(density));
         }
         return lanes;
     }
+
+    public LaneStatus getLaneStatus(int laneId) {
+        Lane lane  = laneService.getLaneById(laneId);
+        int density = trafficDensityService.getTrafficDensity(laneId);
+        return determineExtraLaneStatus(density);
+
+    }
+
 }
