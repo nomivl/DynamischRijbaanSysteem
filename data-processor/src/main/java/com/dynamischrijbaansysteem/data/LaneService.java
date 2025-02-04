@@ -11,10 +11,7 @@ import java.util.List;
 
 public class LaneService {
     private final MongoCollection<Document> laneCollection;
-    private final TrafficDensityService trafficDensityService;
     public LaneService() {
-        // TO DO depedency injection
-        this.trafficDensityService = new TrafficDensityService();
         MongoDatabase database = MongoDBConnection.getDatabase();
         this.laneCollection = database.getCollection("lanes");
     }
@@ -38,6 +35,17 @@ public class LaneService {
             lanes.add(new Lane(laneId, location));
         }
         return lanes;
+    }
+
+    public Lane getLaneById(int laneId) {
+        Document laneDoc = laneCollection.find(new Document("laneId", laneId)).first();
+
+        if(laneDoc != null){
+            String location = laneDoc.getString("location");
+            return new Lane(laneId,location);
+        } else {
+            throw new IllegalArgumentException("Lane with ID " + laneId + " not found.");
+        }
     }
 
 }
