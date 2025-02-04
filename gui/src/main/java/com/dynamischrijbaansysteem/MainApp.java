@@ -1,7 +1,7 @@
 package com.dynamischrijbaansysteem;
 
 import com.dynamischrijbaansysteem.data.LaneService;
-import com.dynamischrijbaansysteem.data.LaneStatusService;
+import com.dynamischrijbaansysteem.data.TrafficDensityService;
 import javafx.application.Application;
 import javafx.scene.Scene;
 import javafx.scene.control.Label;
@@ -17,14 +17,17 @@ import javafx.scene.paint.Color;
 import java.util.List;
 
 public class MainApp extends Application{
-    private final LaneStatusService laneStatusService = new LaneStatusService();
+    private final TrafficDensityService trafficDensityService = new TrafficDensityService();
     private final LaneService laneService  = new LaneService();
+    private final LaneStatusService laneStatusService = new LaneStatusService(laneService, trafficDensityService);
+    private final Label statusLabel = new Label("Verkeersstatus: Laden...");
+
     private Canvas canvas = new Canvas(500,300);
     @Override
     public void start(Stage primaryStage) throws Exception {
         VBox root = new VBox();
         GraphicsContext gc = canvas.getGraphicsContext2D();
-        root.getChildren().addAll(new Label("🚦 Dynamisch Rijbaansysteem"), canvas);
+        root.getChildren().addAll(new Label("🚦 Dynamisch Rijbaansysteem"),statusLabel, canvas);
 
         Scene scene = new Scene(root, 600, 400);
         primaryStage.setTitle("Dynamisch Rijbaansysteem");
@@ -35,8 +38,10 @@ public class MainApp extends Application{
 
     private void startDataRefresh(GraphicsContext gc) {
         Timeline timeline = new Timeline(new KeyFrame(Duration.seconds(5), event -> {
-            List<Lane> lanes = laneStatusService.getUpdatedLanes();
-            drawLanes(gc, lanes);
+            //TO DO: lane via UI selecteren
+            LaneStatus laneStatus = laneStatusService.getLaneStatus(1);
+            drawLanes(gc, laneStatus);
+
         }));
         timeline.setCycleCount(Timeline.INDEFINITE);
         timeline.play();
@@ -45,32 +50,26 @@ public class MainApp extends Application{
         launch(args);
     }
 
-    private void drawLanes(GraphicsContext gc, List<Lane> lanes) {
+    private void drawLanes(GraphicsContext gc, LaneStatus laneStatus) {
 
         gc.clearRect(0,0,canvas.getWidth(), canvas.getHeight());
 
-        // Teken achtergrond
+        Color laneColor = laneStatus == LaneStatus.CLOSED ? Color.RED : Color.GREEN;
+        Color extraLaneColor = laneStatus == LaneStatus.OPEN_EXTRA_LANE ? Color.YELLOW : Color.RED;
+
         gc.setFill(Color.LIGHTGRAY);
+
         gc.fillRect(0,0, canvas.getWidth(), canvas.getHeight());
-
-
-
-        for (int i = 0; i < lanes.size(); i++){
-            LaneStatus laneStatus = lanes.get(i).getLaneStatus();
-            // Bepaal kleur op basis van rijbaanstatus
-
-            Color laneColor = laneStatus == LaneStatus.OPEN_EXTRA_LANE ? Color.GREEN :
-                    laneStatus == LaneStatus.CLOSE_EXTRA_LANE ? Color.RED :
-                    Color.YELLOW; // OPEN_EXTRA_LANE
-
-
-            // Teken rijbanen
-            gc.setFill(laneColor);
-
+        gc.setFill(laneColor);
+        for (int i = 0; i < 3; i++){
             // fillRect(x, y, width, height)
             gc.fillRect(50 + (i * 90), 50, 40, 120); // Rijbanen naast elkaar
-
         }
+
+        gc.setFill(extraLaneColor);
+        gc.fillRect(50 + (3 * 90), 50, 40, 120);
+
+
 
     }
 }
