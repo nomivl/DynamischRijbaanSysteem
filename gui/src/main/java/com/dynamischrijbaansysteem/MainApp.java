@@ -1,75 +1,84 @@
 package com.dynamischrijbaansysteem;
 
+import com.dynamischrijbaansysteem.controllers.LaneOverviewController;
 import com.dynamischrijbaansysteem.data.LaneService;
 import com.dynamischrijbaansysteem.data.TrafficDensityService;
 import javafx.application.Application;
-import javafx.scene.Scene;
-import javafx.scene.control.Label;
-import javafx.scene.layout.VBox;
-import javafx.stage.Stage;
-import javafx.animation.KeyFrame;
-import javafx.animation.Timeline;
-import javafx.util.Duration;
-import javafx.scene.canvas.Canvas;
-import javafx.scene.canvas.GraphicsContext;
-import javafx.scene.paint.Color;
 
-import java.util.List;
+import javafx.application.Application;
+import javafx.scene.Scene;
+import javafx.scene.control.Button;
+import javafx.scene.control.Label;
+import javafx.scene.layout.BorderPane;
+import javafx.scene.layout.HBox;
+import javafx.stage.Stage;
+
+import java.util.concurrent.Executors;
+import java.util.concurrent.ScheduledExecutorService;
+import java.util.concurrent.TimeUnit;
 
 public class MainApp extends Application{
     private final TrafficDensityService trafficDensityService = new TrafficDensityService();
     private final LaneService laneService  = new LaneService();
     private final LaneStatusService laneStatusService = new LaneStatusService(laneService, trafficDensityService);
-    private final Label statusLabel = new Label("Verkeersstatus: Laden...");
+    private final TrafficSimulator trafficSimulator = new TrafficSimulator(laneService, trafficDensityService);
+    private ScheduledExecutorService scheduler;
 
-    private Canvas canvas = new Canvas(500,300);
+    private BorderPane mainLayout;
     @Override
     public void start(Stage primaryStage) throws Exception {
-        VBox root = new VBox();
-        GraphicsContext gc = canvas.getGraphicsContext2D();
-        root.getChildren().addAll(new Label("🚦 Dynamisch Rijbaansysteem"),statusLabel, canvas);
-
-        Scene scene = new Scene(root, 600, 400);
+        startTrafficSimulation();
         primaryStage.setTitle("Dynamisch Rijbaansysteem");
+        // Hoofd Layout (BorderPane verdeelt het scherm in top, left, center, etc.)
+        mainLayout = new BorderPane();
+
+        // Navigatie knoppen
+        Button dashboardButton = new Button("Dashboard");
+        Button lanesButton = new Button("Lanes");
+
+        // Acties aan de knoppen koppelen
+        dashboardButton.setOnAction(e -> showDashboard());
+        lanesButton.setOnAction(e -> showLanesOverview());
+
+        // Voeg het horizontale menu toe aan de TOP van BorderPane
+        HBox topMenu = new HBox(10);
+        topMenu.getChildren().addAll(dashboardButton,lanesButton);
+        mainLayout.setTop(topMenu);
+
+        showDashboard();
+
+        Scene scene = new Scene(mainLayout, 800, 600);
         primaryStage.setScene(scene);
         primaryStage.show();
-        startDataRefresh(gc);
+
     }
 
-    private void startDataRefresh(GraphicsContext gc) {
-        Timeline timeline = new Timeline(new KeyFrame(Duration.seconds(5), event -> {
-            //TO DO: lane via UI selecteren
-            LaneStatus laneStatus = laneStatusService.getLaneStatus(1);
-            drawLanes(gc, laneStatus);
-
-        }));
-        timeline.setCycleCount(Timeline.INDEFINITE);
-        timeline.play();
+    private void showDashboard() {
+        mainLayout.setCenter(new Label("Dashboard"));
     }
+
+    private void showLanesOverview() {
+        LaneOverviewController lanesController = new LaneOverviewController(laneStatusService);
+        mainLayout.setCenter(lanesController.getLaneOverviewLayout());
+    }
+
+    private void startTrafficSimulation() {
+        scheduler = Executors.newScheduledThreadPool(1);
+        scheduler.scheduleAtFixedRate(() -> {
+            trafficSimulator.generateTrafficData();
+        }, 0,5, TimeUnit.SECONDS);
+    }
+
     public static void main(String[] args) {
         launch(args);
     }
 
-    private void drawLanes(GraphicsContext gc, LaneStatus laneStatus) {
-
-        gc.clearRect(0,0,canvas.getWidth(), canvas.getHeight());
-
-        Color laneColor = laneStatus == LaneStatus.CLOSED ? Color.RED : Color.GREEN;
-        Color extraLaneColor = laneStatus == LaneStatus.OPEN_EXTRA_LANE ? Color.YELLOW : Color.RED;
-
-        gc.setFill(Color.LIGHTGRAY);
-
-        gc.fillRect(0,0, canvas.getWidth(), canvas.getHeight());
-        gc.setFill(laneColor);
-        for (int i = 0; i < 3; i++){
-            // fillRect(x, y, width, height)
-            gc.fillRect(50 + (i * 90), 50, 40, 120); // Rijbanen naast elkaar
+    @Override
+    public void stop() throws Exception {
+        if (scheduler != null && !scheduler.isShutdown()) {
+            scheduler.shutdown();
         }
-
-        gc.setFill(extraLaneColor);
-        gc.fillRect(50 + (3 * 90), 50, 40, 120);
-
-
-
     }
+
+
 }

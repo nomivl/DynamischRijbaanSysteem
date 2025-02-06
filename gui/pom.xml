@@ -43,5 +43,11 @@
       <artifactId>dynamic-lane-logic</artifactId>
       <version>1.0-SNAPSHOT</version>
     </dependency>
+      <dependency>
+          <groupId>com.dynamischrijbaansysteem</groupId>
+          <artifactId>traffic-simulator</artifactId>
+          <version>1.0-SNAPSHOT</version>
+          <scope>compile</scope>
+      </dependency>
   </dependencies>
 </project>

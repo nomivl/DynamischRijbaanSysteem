@@ -1,8 +1,11 @@
 package com.dynamischrijbaansysteem.data;
 
+import com.dynamischrijbaansysteem.Lane;
 import com.mongodb.client.MongoCollection;
 import com.mongodb.client.MongoDatabase;
 import org.bson.Document;
+
+import java.sql.Timestamp;
 
 public class TrafficDensityService {
 
@@ -13,7 +16,19 @@ public class TrafficDensityService {
         this.collection = database.getCollection("traffic_data");
     }
 
-   public int getTrafficDensity(int laneId){
+   public Lane getLaneTrafficData(Lane lane){
+        Document latestData = collection.find(new Document("laneId", lane.getLaneId()))
+                .sort(new Document("timestamp", -1))
+                .first();
+        if (latestData != null) {
+            lane.setDensity(latestData.getInteger("density",0));
+            lane.setTimestamp(new Timestamp(latestData.getLong("timestamp")));
+            return lane;
+        }
+        return null;
+   }
+
+    public int getTrafficDensity(int laneId){
         Document latestData = collection.find(new Document("laneId", laneId))
                 .sort(new Document("timestamp", -1))
                 .first();
@@ -21,7 +36,7 @@ public class TrafficDensityService {
             return latestData.getInteger("density",0);
         }
         return 0;
-   }
+    }
 
    public void insertTrafficDensity(int laneId, int density){
         Document document = new Document()

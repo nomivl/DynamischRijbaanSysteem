@@ -30,8 +30,6 @@ public class LaneService {
 
             int laneId = doc.getInteger("laneId");
             String location = doc.getString("location");
-
-
             lanes.add(new Lane(laneId, location));
         }
         return lanes;
