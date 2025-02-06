@@ -1,10 +1,15 @@
 package com.dynamischrijbaansysteem;
 
+import java.sql.Time;
+import java.sql.Timestamp;
+
 public class Lane {
     private int laneId;
     private String location;
     private int density;
+    private Timestamp timestamp;
     private LaneStatus laneStatus;
+
     public Lane(int laneId, String location) {
         this.laneId = laneId;
         this.location = location;
@@ -12,7 +17,7 @@ public class Lane {
         //this.laneStatus = laneStatus;
     }
 
-    public int getLaneId() {
+    public Integer getLaneId() {
         return laneId;
     }
 
@@ -28,7 +33,7 @@ public class Lane {
         this.location = location;
     }
 
-    public int getDensity() {
+    public Integer getDensity() {
         return density;
     }
 
@@ -42,6 +47,12 @@ public class Lane {
 
     public void setLaneStatus(LaneStatus laneStatus) {
         this.laneStatus = laneStatus;
+    }
+    public Timestamp getTimestamp(){
+        return this.timestamp;
+    }
+    public void setTimestamp(Timestamp timestamp){
+        this.timestamp = timestamp;
     }
     @Override
     public String toString() {
