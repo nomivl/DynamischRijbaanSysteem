@@ -5,22 +5,19 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="5f4c1205-9544-43d9-ae34-6bc9ae1b8650" name="Changes" comment="">
-      <change afterPath="$PROJECT_DIR$/.gitignore" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/encodings.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/uiDesigner.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/vcs.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/data-processor/src/main/java/com/dynamischrijbaansysteem/data/MongoDBConnection.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/data-processor/src/main/java/com/dynamischrijbaansysteem/data/TrafficDataService.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/data-processor/src/main/resources/logback.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/data-processor/src/test/java/com/dynamischrijbaansysteem/data/MongoDBConnectionTest.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/dynamic-lane-logic/src/main/java/com/dynamischrijbaansysteem/LaneManager.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/dynamic-lane-logic/src/test/java/com/dynamischrijbaansysteem/LaneManagerTest.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/gui/src/main/java/com/dynamischrijbaansysteem/MainApp.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/pom.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/traffic-simulator/src/main/java/com/dynamischrijbaansysteem/TrafficSimulator.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/traffic-simulator/src/test/java/com/dynamischrijbaansysteem/LaneManagerTest.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/gui/src/main/java/com/dynamischrijbaansysteem/MainApp_V1.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/encodings.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/encodings.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/common/src/main/java/com/dynamischrijbaansysteem/Lane.java" beforeDir="false" afterPath="$PROJECT_DIR$/common/src/main/java/com/dynamischrijbaansysteem/Lane.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/data-processor/src/main/java/com/dynamischrijbaansysteem/data/LaneService.java" beforeDir="false" afterPath="$PROJECT_DIR$/data-processor/src/main/java/com/dynamischrijbaansysteem/data/LaneService.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/data-processor/src/main/java/com/dynamischrijbaansysteem/data/TrafficDensityService.java" beforeDir="false" afterPath="$PROJECT_DIR$/data-processor/src/main/java/com/dynamischrijbaansysteem/data/TrafficDensityService.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/data-processor/src/test/java/com/dynamischrijbaansysteem/data/MongoDBConnectionTest.java" beforeDir="false" afterPath="$PROJECT_DIR$/data-processor/src/test/java/com/dynamischrijbaansysteem/data/MongoDBConnectionTest.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/dynamic-lane-logic/src/main/java/com/dynamischrijbaansysteem/LaneStatusService.java" beforeDir="false" afterPath="$PROJECT_DIR$/dynamic-lane-logic/src/main/java/com/dynamischrijbaansysteem/LaneStatusService.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/gui/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/gui/pom.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/gui/src/main/java/com/dynamischrijbaansysteem/MainApp.java" beforeDir="false" afterPath="$PROJECT_DIR$/gui/src/main/java/com/dynamischrijbaansysteem/MainApp.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/gui/src/main/java/com/dynamischrijbaansysteem/controllers/LaneOverviewController.java" beforeDir="false" afterPath="$PROJECT_DIR$/gui/src/main/java/com/dynamischrijbaansysteem/controllers/LaneOverviewController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/traffic-simulator/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/traffic-simulator/pom.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/traffic-simulator/src/main/java/com/dynamischrijbaansysteem/TrafficSimulator.java" beforeDir="false" afterPath="$PROJECT_DIR$/traffic-simulator/src/main/java/com/dynamischrijbaansysteem/TrafficSimulator.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -35,6 +32,11 @@
     </option>
   </component>
   <component name="Git.Settings">
+    <option name="RECENT_BRANCH_BY_REPOSITORY">
+      <map>
+        <entry key="$PROJECT_DIR$" value="master" />
+      </map>
+    </option>
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
   </component>
   <component name="ProjectColorInfo">{
@@ -50,20 +52,26 @@
   </component>
   <component name="PropertiesComponent"><![CDATA[{
   "keyToString": {
+    "Application.GUI.executor": "Run",
     "Application.MainApp.executor": "Run",
     "Application.MongoDBConnection.executor": "Run",
+    "Application.Traffic Simulator.executor": "Run",
     "Application.TrafficSimulator.executor": "Debug",
     "JUnit.LaneManagerTest (1).executor": "Run",
     "JUnit.LaneManagerTest,testOpenExtraLane and 2 more.executor": "Debug",
     "JUnit.LaneManagerTest.executor": "Debug",
     "JUnit.LaneManagerTest.testOpenExtraLane.executor": "Run",
+    "JUnit.LaneStatusServiceTest.executor": "Run",
+    "JUnit.LaneStatusServiceTest.testGetLaneStatus.executor": "Run",
     "JUnit.MongoDBConnectionTest.executor": "Run",
     "JUnit.MongoDBConnectionTest.testInsertAndRetrieve.executor": "Run",
+    "JUnit.MongoDBConnectionTest.testInsertAndRetrieveLanes.executor": "Run",
+    "JUnit.MongoDBConnectionTest.testInsertAndRetrieveTrafficData.executor": "Debug",
     "Maven. [org.apache.maven.plugins:maven-archetype-plugin:RELEASE:generate].executor": "Run",
     "RunOnceActivity.OpenProjectViewOnStart": "true",
     "RunOnceActivity.ShowReadmeOnStart": "true",
     "SHARE_PROJECT_CONFIGURATION_FILES": "true",
-    "git-widget-placeholder": "master",
+    "git-widget-placeholder": "GUI__with__individual__LaneStatus",
     "kotlin-language-version-configured": "true",
     "node.js.detected.package.eslint": "true",
     "node.js.detected.package.tslint": "true",
@@ -73,43 +81,41 @@
     "project.structure.last.edited": "Project",
     "project.structure.proportion": "0.0",
     "project.structure.side.proportion": "0.0",
-    "settings.editor.selected.configurable": "MavenSettings",
+    "settings.editor.selected.configurable": "preferences.lookFeel",
     "vue.rearranger.settings.migration": "true"
   }
 }]]></component>
-  <component name="RunManager" selected="Application.MainApp">
-    <configuration name="MainApp" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
+  <component name="RecentsManager">
+    <key name="MoveClassesOrPackagesDialog.RECENTS_KEY">
+      <recent name="com.dynamischrijbaansysteem" />
+    </key>
+  </component>
+  <component name="RunManager" selected="Application.GUI">
+    <configuration name="GUI" type="Application" factoryName="Application">
       <option name="MAIN_CLASS_NAME" value="com.dynamischrijbaansysteem.MainApp" />
       <module name="gui" />
-      <option name="VM_PARAMETERS" value="--module-path C:\CBW-Programs\javafx-sdk-17.0.2\lib --add-modules javafx.controls,javafx.fxml " />
-      <extension name="coverage">
-        <pattern>
-          <option name="PATTERN" value="com.dynamischrijbaansysteem.*" />
-          <option name="ENABLED" value="true" />
-        </pattern>
-      </extension>
+      <option name="VM_PARAMETERS" value="--module-path &quot;C:\CBW-Programs\javafx-sdk-17.0.2\lib&quot; --add-modules javafx.controls,javafx.fxml" />
       <method v="2">
         <option name="Make" enabled="true" />
       </method>
     </configuration>
-    <configuration name="TrafficSimulator" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
+    <configuration name="Traffic Simulator" type="Application" factoryName="Application">
       <option name="MAIN_CLASS_NAME" value="com.dynamischrijbaansysteem.TrafficSimulator" />
       <module name="traffic-simulator" />
-      <extension name="coverage">
-        <pattern>
-          <option name="PATTERN" value="com.dynamischrijbaansysteem.*" />
-          <option name="ENABLED" value="true" />
-        </pattern>
-      </extension>
       <method v="2">
         <option name="Make" enabled="true" />
       </method>
     </configuration>
-    <configuration name="LaneManagerTest (1)" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+    <configuration name="Simulator + GUI" type="CompoundRunConfigurationType">
+      <toRun name="GUI" type="Application" />
+      <toRun name="Traffic Simulator" type="Application" />
+      <method v="2" />
+    </configuration>
+    <configuration name="LaneManagerTest" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
       <module name="traffic-simulator" />
       <extension name="coverage">
         <pattern>
-          <option name="PATTERN" value="com.dynamischrijbaansysteem.*" />
+          <option name="PATTERN" value="com.dynamischrijbaansysteem.controllers.*" />
           <option name="ENABLED" value="true" />
         </pattern>
       </extension>
@@ -120,47 +126,86 @@
         <option name="Make" enabled="true" />
       </method>
     </configuration>
-    <configuration name="LaneManagerTest" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+    <configuration name="LaneStatusServiceTest" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
       <module name="dynamic-lane-logic" />
       <extension name="coverage">
         <pattern>
-          <option name="PATTERN" value="com.dynamischrijbaansysteem.*" />
+          <option name="PATTERN" value="com.dynamischrijbaansysteem.controllers.*" />
           <option name="ENABLED" value="true" />
         </pattern>
       </extension>
       <option name="PACKAGE_NAME" value="com.dynamischrijbaansysteem" />
-      <option name="MAIN_CLASS_NAME" value="com.dynamischrijbaansysteem.LaneManagerTest" />
+      <option name="MAIN_CLASS_NAME" value="com.dynamischrijbaansysteem.LaneStatusServiceTest" />
+      <option name="METHOD_NAME" value="" />
       <option name="TEST_OBJECT" value="class" />
       <method v="2">
         <option name="Make" enabled="true" />
       </method>
     </configuration>
-    <configuration name="LaneManagerTest,testOpenExtraLane and 2 more" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+    <configuration name="LaneStatusServiceTest.testGetLaneStatus" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
       <module name="dynamic-lane-logic" />
-      <option name="TEST_OBJECT" value="pattern" />
-      <patterns>
-        <pattern testClass="com.dynamischrijbaansysteem.LaneManagerTest,testOpenExtraLane" />
-        <pattern testClass="com.dynamischrijbaansysteem.LaneManagerTest,testCloseExtraLane" />
-        <pattern testClass="com.dynamischrijbaansysteem.LaneManagerTest,testKeepLaneSame" />
-      </patterns>
+      <extension name="coverage">
+        <pattern>
+          <option name="PATTERN" value="com.dynamischrijbaansysteem.controllers.*" />
+          <option name="ENABLED" value="true" />
+        </pattern>
+      </extension>
+      <option name="PACKAGE_NAME" value="com.dynamischrijbaansysteem" />
+      <option name="MAIN_CLASS_NAME" value="com.dynamischrijbaansysteem.LaneStatusServiceTest" />
+      <option name="METHOD_NAME" value="testGetLaneStatus" />
+      <option name="TEST_OBJECT" value="method" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="MongoDBConnectionTest.testInsertAndRetrieveLanes" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+      <module name="data-processor" />
+      <extension name="coverage">
+        <pattern>
+          <option name="PATTERN" value="com.dynamischrijbaansysteem.controllers.*" />
+          <option name="ENABLED" value="true" />
+        </pattern>
+      </extension>
+      <option name="PACKAGE_NAME" value="com.dynamischrijbaansysteem.data" />
+      <option name="MAIN_CLASS_NAME" value="com.dynamischrijbaansysteem.data.MongoDBConnectionTest" />
+      <option name="METHOD_NAME" value="testInsertAndRetrieveLanes" />
+      <option name="TEST_OBJECT" value="method" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="MongoDBConnectionTest.testInsertAndRetrieveTrafficData" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+      <module name="data-processor" />
+      <extension name="coverage">
+        <pattern>
+          <option name="PATTERN" value="com.dynamischrijbaansysteem.data.*" />
+          <option name="ENABLED" value="true" />
+        </pattern>
+      </extension>
+      <option name="PACKAGE_NAME" value="com.dynamischrijbaansysteem.data" />
+      <option name="MAIN_CLASS_NAME" value="com.dynamischrijbaansysteem.data.MongoDBConnectionTest" />
+      <option name="METHOD_NAME" value="testInsertAndRetrieveTrafficData" />
+      <option name="TEST_OBJECT" value="method" />
       <method v="2">
         <option name="Make" enabled="true" />
       </method>
     </configuration>
     <list>
-      <item itemvalue="Application.MainApp" />
-      <item itemvalue="Application.TrafficSimulator" />
+      <item itemvalue="Application.GUI" />
+      <item itemvalue="Application.Traffic Simulator" />
+      <item itemvalue="Compound.Simulator + GUI" />
       <item itemvalue="JUnit.LaneManagerTest" />
-      <item itemvalue="JUnit.LaneManagerTest,testOpenExtraLane and 2 more" />
-      <item itemvalue="JUnit.LaneManagerTest (1)" />
+      <item itemvalue="JUnit.MongoDBConnectionTest.testInsertAndRetrieveTrafficData" />
+      <item itemvalue="JUnit.LaneStatusServiceTest" />
+      <item itemvalue="JUnit.LaneStatusServiceTest.testGetLaneStatus" />
+      <item itemvalue="JUnit.MongoDBConnectionTest.testInsertAndRetrieveLanes" />
     </list>
     <recent_temporary>
       <list>
-        <item itemvalue="Application.MainApp" />
-        <item itemvalue="Application.TrafficSimulator" />
-        <item itemvalue="JUnit.LaneManagerTest (1)" />
-        <item itemvalue="JUnit.LaneManagerTest" />
-        <item itemvalue="JUnit.LaneManagerTest,testOpenExtraLane and 2 more" />
+        <item itemvalue="JUnit.MongoDBConnectionTest.testInsertAndRetrieveTrafficData" />
+        <item itemvalue="JUnit.MongoDBConnectionTest.testInsertAndRetrieveLanes" />
+        <item itemvalue="JUnit.LaneStatusServiceTest" />
+        <item itemvalue="JUnit.LaneStatusServiceTest.testGetLaneStatus" />
       </list>
     </recent_temporary>
   </component>
@@ -175,6 +220,7 @@
       <workItem from="1737649561756" duration="2950000" />
       <workItem from="1737988492914" duration="7758000" />
       <workItem from="1738055579119" duration="25241000" />
+      <workItem from="1738834789328" duration="12247000" />
     </task>
     <servers />
   </component>
@@ -185,6 +231,7 @@
     <option name="OPEN_GENERIC_TABS">
       <map>
         <entry key="84192cf3-6055-4e64-b723-fd276aec16ba" value="TOOL_WINDOW" />
+        <entry key="fefca4eb-105f-4b8b-a05b-19fce3724d1a" value="TOOL_WINDOW" />
       </map>
     </option>
     <option name="TAB_STATES">
@@ -212,6 +259,16 @@
               </option>
               <option name="SHOW_ONLY_AFFECTED_CHANGES" value="true" />
             </State>
+          </value>
+        </entry>
+        <entry key="MAIN">
+          <value>
+            <State />
+          </value>
+        </entry>
+        <entry key="fefca4eb-105f-4b8b-a05b-19fce3724d1a">
+          <value>
+            <State />
           </value>
         </entry>
       </map>

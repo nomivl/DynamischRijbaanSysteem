@@ -16,8 +16,9 @@ public class MongoDBConnectionTest {
     @Test
     public void testInsertAndRetrieveLanes(){
        LaneService laneService = new LaneService();
-        // voeg testdata toe
        laneService.insertLane(1,"A1 Highway");
+        laneService.insertLane(2,"A2 Highway");
+        laneService.insertLane(3,"A3 Highway");
         //haal data op en toon deze
        laneService.getLanes();
     }

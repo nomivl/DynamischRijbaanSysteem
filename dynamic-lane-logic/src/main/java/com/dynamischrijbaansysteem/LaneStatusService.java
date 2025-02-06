@@ -6,6 +6,7 @@ import com.dynamischrijbaansysteem.data.TrafficDensityService;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.stream.Collectors;
 
 public class LaneStatusService {
     private final LaneService laneService;
@@ -30,6 +31,11 @@ public class LaneStatusService {
     }
 
     public List<Lane> getUpdatedLanes(){
+        List<Lane> lanes = laneService.getLanes();
+        return lanes.stream().map(trafficDensityService::getLaneTrafficData).peek(lane -> lane.setLaneStatus(determineExtraLaneStatus(lane.getDensity()))).collect(Collectors.toList());
+    }
+
+    public List<Lane> getUpdatedLanesOld(){
         List<Lane> lanes = laneService.getLanes();
         for (Lane lane : lanes) {
             int density = trafficDensityService.getTrafficDensity(lane.getLaneId());
