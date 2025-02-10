@@ -8,6 +8,8 @@ import javafx.animation.KeyFrame;
 import javafx.animation.SequentialTransition;
 import javafx.animation.Timeline;
 import javafx.application.Platform;
+import javafx.fxml.FXML;
+import javafx.fxml.Initializable;
 import javafx.geometry.Insets;
 import javafx.scene.control.Button;
 import javafx.scene.layout.BorderPane;
@@ -18,13 +20,17 @@ import javafx.scene.control.Label;
 import javafx.scene.paint.Color;
 import javafx.util.Duration;
 
+import java.net.URL;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.ResourceBundle;
 
-public class LaneOverviewController {
+public class LaneOverviewController implements Initializable {
     private BorderPane laneOverviewLayout;
-    private final LaneStatusService laneStatusService;
+    // TO DO Final implementeren
+    private  LaneStatusService laneStatusService;
+    @FXML private GridPane laneTable;
 
     private Map<Integer, Label> idLabels = new HashMap<>();
     private Map<Integer, Label> locationLabels = new HashMap<>();
@@ -32,27 +38,17 @@ public class LaneOverviewController {
     private Map<Integer, Label> densityLabels = new HashMap<>();
     private Map<Integer, Label> timestampsLabels = new HashMap<>();
 
-    public LaneOverviewController(LaneStatusService laneStatusService) {
+    public LaneOverviewController() {
+
+    }
+
+    public void setLaneStatusService(LaneStatusService laneStatusService) {
         this.laneStatusService = laneStatusService;
-        laneOverviewLayout = new BorderPane();
-        GridPane laneTable = getLaneTable();
-        laneOverviewLayout.setCenter(laneTable);
-        //laneOverviewLayout.getChildren().add(laneTable);
-        laneOverviewLayout.setStyle("-fx-background-color: #e8e8e8");
+        populateLaneTable();
         startLiveUpdates();
     }
 
-    private GridPane getLaneTable () {
-        GridPane table  = new GridPane();
-        table.setHgap(10);
-        table.setVgap(10);
-        table.setPadding(new Insets(20));// Ruimte rondom de grid
-        table.add(new Label("Id"),0,0);
-        table.add(new Label("Lane"),1,0);
-        table.add(new Label("Status"),2,0);
-        table.add(new Label("Density"),3,0);
-        table.add(new Label("Timestamp"),4,0);
-        table.add(new Label("Details"),5,0);
+    private void populateLaneTable () {
 
 
         List<Lane> lanes = laneStatusService.getUpdatedLanes();
@@ -75,17 +71,16 @@ public class LaneOverviewController {
             Label timestampLabel = new Label(lane.getTimestamp().toString());
             timestampsLabels.put(id, timestampLabel);
 
-            table.add(idLabel,0,row);
-            table.add(locationLabel,1,row);
-            table.add(statusLabel,2,row);
-            table.add(densityLabel,3,row);
-            table.add(timestampLabel,4,row);
-            table.add(new Button("Details"),5,row);
+            Button detailButton = new Button("Details");
+            laneTable.add(idLabel,0,row);
+            laneTable.add(locationLabel,1,row);
+            laneTable.add(statusLabel,2,row);
+            laneTable.add(densityLabel,3,row);
+            laneTable.add(timestampLabel,4,row);
+            laneTable.add(detailButton,5,row);
 
             row ++;
         }
-
-        return table;
     }
 
     private void startLiveUpdates() {
@@ -146,4 +141,9 @@ public class LaneOverviewController {
         return laneOverviewLayout;
     }
 
+    @Override
+    public void initialize(URL url, ResourceBundle resourceBundle) {
+
+
+    }
 }

@@ -5,7 +5,8 @@ import com.dynamischrijbaansysteem.data.LaneService;
 import com.dynamischrijbaansysteem.data.TrafficDensityService;
 import javafx.application.Application;
 
-import javafx.application.Application;
+import javafx.fxml.FXMLLoader;
+import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
@@ -13,6 +14,7 @@ import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.HBox;
 import javafx.stage.Stage;
 
+import java.net.URL;
 import java.util.concurrent.Executors;
 import java.util.concurrent.ScheduledExecutorService;
 import java.util.concurrent.TimeUnit;
@@ -58,8 +60,18 @@ public class MainApp extends Application{
     }
 
     private void showLanesOverview() {
-        LaneOverviewController lanesController = new LaneOverviewController(laneStatusService);
-        mainLayout.setCenter(lanesController.getLaneOverviewLayout());
+        System.out.println("FXML URL: " + getClass().getResource("/lane-overview.fxml"));
+        URL url = getClass().getResource("/lane-overview.fxml");
+        try {
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("/lane-overview.fxml"));
+            Parent lanesView = loader.load();
+            LaneOverviewController controller = loader.getController();
+            controller.setLaneStatusService(laneStatusService);
+            mainLayout.setCenter(lanesView);
+        } catch(Exception e){
+            e.printStackTrace();
+        }
+
     }
 
     private void startTrafficSimulation() {
