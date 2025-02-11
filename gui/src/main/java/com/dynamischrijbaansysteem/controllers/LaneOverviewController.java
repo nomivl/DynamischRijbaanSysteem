@@ -3,14 +3,17 @@ package com.dynamischrijbaansysteem.controllers;
 import com.dynamischrijbaansysteem.Lane;
 import com.dynamischrijbaansysteem.LaneStatus;
 import com.dynamischrijbaansysteem.LaneStatusService;
+import com.dynamischrijbaansysteem.MainApp;
 import javafx.animation.FadeTransition;
 import javafx.animation.KeyFrame;
 import javafx.animation.SequentialTransition;
 import javafx.animation.Timeline;
 import javafx.application.Platform;
 import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
 import javafx.geometry.Insets;
+import javafx.scene.Parent;
 import javafx.scene.control.Button;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.ColumnConstraints;
@@ -30,6 +33,7 @@ public class LaneOverviewController implements Initializable {
     private BorderPane laneOverviewLayout;
     // TO DO Final implementeren
     private  LaneStatusService laneStatusService;
+    private MainApp mainApp;
     @FXML private GridPane laneTable;
 
     private Map<Integer, Label> idLabels = new HashMap<>();
@@ -38,16 +42,20 @@ public class LaneOverviewController implements Initializable {
     private Map<Integer, Label> densityLabels = new HashMap<>();
     private Map<Integer, Label> timestampsLabels = new HashMap<>();
 
+
     public LaneOverviewController() {
 
     }
 
     public void setLaneStatusService(LaneStatusService laneStatusService) {
         this.laneStatusService = laneStatusService;
+    }
+
+    public void setMainApp(MainApp mainApp) {
+        this.mainApp = mainApp;
         populateLaneTable();
         startLiveUpdates();
     }
-
     private void populateLaneTable () {
 
 
@@ -72,6 +80,7 @@ public class LaneOverviewController implements Initializable {
             timestampsLabels.put(id, timestampLabel);
 
             Button detailButton = new Button("Details");
+            detailButton.setOnAction( e -> showDetails(id));
             laneTable.add(idLabel,0,row);
             laneTable.add(locationLabel,1,row);
             laneTable.add(statusLabel,2,row);
@@ -137,8 +146,8 @@ public class LaneOverviewController implements Initializable {
 
     }
 
-    public BorderPane getLaneOverviewLayout() {
-        return laneOverviewLayout;
+    public void showDetails(Integer laneId) {
+        mainApp.showDetails(laneId);
     }
 
     @Override

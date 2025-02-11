@@ -2,10 +2,16 @@ package com.dynamischrijbaansysteem.data;
 
 import com.dynamischrijbaansysteem.Lane;
 import com.mongodb.client.MongoCollection;
+import com.mongodb.client.MongoCursor;
 import com.mongodb.client.MongoDatabase;
 import org.bson.Document;
 
+import java.sql.Time;
 import java.sql.Timestamp;
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
 
 public class TrafficDensityService {
 
@@ -28,6 +34,22 @@ public class TrafficDensityService {
         return null;
    }
 
+   public List<Map<String, Object>> getHistoryFromDB(int id) {
+       List<Map<String, Object>> history = new ArrayList<>();
+       try (MongoCursor<Document> cursor = collection.find(new Document("laneId", id)).sort(new Document("timestamp",-1)).iterator()) {
+           while (cursor.hasNext()) {
+               Document doc = cursor.next();
+               Map<String, Object> entry = new HashMap<>();
+               entry.put("density", doc.getInteger("density"));
+               entry.put("timestamp", new Timestamp(doc.getLong("timestamp")));
+               history.add(entry);
+           }
+       }
+       return history;
+   }
+
+
+
     public int getTrafficDensity(int laneId){
         Document latestData = collection.find(new Document("laneId", laneId))
                 .sort(new Document("timestamp", -1))
@@ -37,6 +59,7 @@ public class TrafficDensityService {
         }
         return 0;
     }
+
 
    public void insertTrafficDensity(int laneId, int density){
         Document document = new Document()

@@ -1,0 +1,21 @@
+/* Algemeen voor de root van de Scene */
+.root {
+    -fx-padding:20px;
+}
+
+.button {
+    fx-margin:0px;
+
+}
+
+.h1 {
+    -fx-font-size: 20px;
+    -fx-font-weight: bold;
+}
+
+
+GridPane {
+    -fx-start-margin: 10px;
+    -fx-background-color: #fefefe;
+    -fx-padding: 10px;
+}

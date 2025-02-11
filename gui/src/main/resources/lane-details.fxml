@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.layout.BorderPane?>
+<?import javafx.scene.layout.GridPane?>
+
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.shape.Rectangle?>
+<?import javafx.scene.control.TableView?>
+<?import javafx.scene.control.TableColumn?>
+<BorderPane xmlns="http://javafx.com/javafx/17"
+            xmlns:fx="http://javafx.com/fxml/1"
+            fx:controller="com.dynamischrijbaansysteem.controllers.LaneDetailController">
+    <top>
+        <Label fx:id="locationLabel" styleClass="h1"/>
+    </top>
+    <center>
+        <VBox>
+            <GridPane fx:id="laneDetailTable" hgap="10" vgap="10" styleClass="table">
+                <Label text="ID"  GridPane.columnIndex="0" GridPane.rowIndex="0"/>
+                <Label text="Status"  GridPane.columnIndex="0" GridPane.rowIndex="1"/>
+                <Label text="Verkeersdichtheid"  GridPane.columnIndex="0" GridPane.rowIndex="2"/>
+                <Label text="Laatst bijgewerkt"  GridPane.columnIndex="0" GridPane.rowIndex="3"/>
+            </GridPane>
+
+
+            <TableView fx:id="historyTable" prefHeight="200" prefWidth="300">
+                <columns>
+                    <TableColumn fx:id="densityColumn" text="Verkeersdichtheid"/>
+                    <TableColumn fx:id="timestampColumn" text="timestamp"/>
+                </columns>
+            </TableView>
+        </VBox>
+    </center>
+</BorderPane>
