@@ -2,6 +2,9 @@ package com.dynamischrijbaansysteem;
 
 import java.sql.Time;
 import java.sql.Timestamp;
+import java.util.List;
+import java.util.Map;
+import java.util.Objects;
 
 public class Lane {
     private int laneId;
@@ -9,12 +12,17 @@ public class Lane {
     private int density;
     private Timestamp timestamp;
     private LaneStatus laneStatus;
-
+    private List<Map<String,Object>> history;
     public Lane(int laneId, String location) {
         this.laneId = laneId;
         this.location = location;
-        //this.density = density;
-        //this.laneStatus = laneStatus;
+    }
+
+    public Lane(int laneId, String location, int density, LaneStatus laneStatus) {
+        this.laneId = laneId;
+        this.location = location;
+        this.density = density;
+        this.laneStatus = laneStatus;
     }
 
     public Integer getLaneId() {
@@ -53,6 +61,13 @@ public class Lane {
     }
     public void setTimestamp(Timestamp timestamp){
         this.timestamp = timestamp;
+    }
+    public List<Map<String, Object>> getHistory() {
+        return history;
+    }
+
+    public void setHistory(List<Map<String, Object>> history) {
+        this.history = history;
     }
     @Override
     public String toString() {
