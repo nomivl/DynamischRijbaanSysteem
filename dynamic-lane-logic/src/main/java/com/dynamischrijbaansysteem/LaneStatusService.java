@@ -35,6 +35,13 @@ public class LaneStatusService {
         return lanes.stream().map(trafficDensityService::getLaneTrafficData).peek(lane -> lane.setLaneStatus(determineExtraLaneStatus(lane.getDensity()))).collect(Collectors.toList());
     }
 
+    public Lane getUpdatedLane(Integer laneId) {
+        Lane lane = trafficDensityService.getLaneTrafficData(laneService.getLaneById(laneId));
+        lane.setLaneStatus(determineExtraLaneStatus(lane.getDensity()));
+        lane.setHistory(trafficDensityService.getHistoryFromDB(laneId));
+        return lane;
+
+    }
     public List<Lane> getUpdatedLanesOld(){
         List<Lane> lanes = laneService.getLanes();
         for (Lane lane : lanes) {

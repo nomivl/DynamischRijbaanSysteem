@@ -1,5 +1,6 @@
 package com.dynamischrijbaansysteem;
 
+import com.dynamischrijbaansysteem.controllers.LaneDetailController;
 import com.dynamischrijbaansysteem.controllers.LaneOverviewController;
 import com.dynamischrijbaansysteem.data.LaneService;
 import com.dynamischrijbaansysteem.data.TrafficDensityService;
@@ -48,8 +49,8 @@ public class MainApp extends Application{
         mainLayout.setTop(topMenu);
 
         showDashboard();
-
         Scene scene = new Scene(mainLayout, 800, 600);
+        scene.getStylesheets().add(getClass().getResource("/style.css").toExternalForm());
         primaryStage.setScene(scene);
         primaryStage.show();
 
@@ -67,11 +68,25 @@ public class MainApp extends Application{
             Parent lanesView = loader.load();
             LaneOverviewController controller = loader.getController();
             controller.setLaneStatusService(laneStatusService);
+            controller.setMainApp(this);
             mainLayout.setCenter(lanesView);
         } catch(Exception e){
             e.printStackTrace();
         }
 
+    }
+
+    public void showDetails(Integer laneId) {
+        URL url = getClass().getResource("/lane-details.fxml");
+        try {
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("/lane-details.fxml"));
+            Parent laneDetails = loader.load();
+            LaneDetailController controller = loader.getController();
+            controller.setLane(laneStatusService.getUpdatedLane(laneId));
+            mainLayout.setCenter(laneDetails);
+        } catch (Exception e){
+            e.printStackTrace();
+        }
     }
 
     private void startTrafficSimulation() {
