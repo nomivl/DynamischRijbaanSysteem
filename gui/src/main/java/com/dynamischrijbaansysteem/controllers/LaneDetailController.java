@@ -2,16 +2,16 @@ package com.dynamischrijbaansysteem.controllers;
 
 import com.dynamischrijbaansysteem.Lane;
 import com.dynamischrijbaansysteem.LaneStatusService;
+import com.dynamischrijbaansysteem.view.DensityCell;
 import javafx.beans.Observable;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
-import javafx.scene.control.Label;
-import javafx.scene.control.TableColumn;
-import javafx.scene.control.TableView;
+import javafx.scene.control.*;
 import javafx.scene.control.cell.MapValueFactory;
 import javafx.scene.layout.GridPane;
+import javafx.scene.layout.HBox;
 
 import java.net.URL;
 import java.util.List;
@@ -27,9 +27,9 @@ public class LaneDetailController implements Initializable {
     @FXML
     private TableView<Map<String, Object>> historyTable;
     @FXML
-    private TableColumn<Map, Object>densityColumn =  new TableColumn<>("Density");
+    private TableColumn<Map, Object> timestampColumn;
     @FXML
-    private TableColumn<Map, Object> timestampColumn = new TableColumn<>("timestamp");
+    private TableColumn<Map, Object>densityColumn;
 
     private Lane lane;
 
@@ -37,6 +37,7 @@ public class LaneDetailController implements Initializable {
         this.lane = lane;
         populateLaneDetailTable();
         locationLabel.setText(lane.getLocation());
+        historyTable.setColumnResizePolicy(TableView.CONSTRAINED_RESIZE_POLICY);
         populateHistoryTable();
     }
     @Override
@@ -57,10 +58,11 @@ public class LaneDetailController implements Initializable {
     }
 
     public void populateHistoryTable(){
-
+        timestampColumn.setCellValueFactory(new MapValueFactory<>("timestamp"));
 
         densityColumn.setCellValueFactory(new MapValueFactory<>("density"));
-        timestampColumn.setCellValueFactory(new MapValueFactory<>("timestamp"));
+        densityColumn.setCellFactory(column -> new DensityCell());
+
         List<Map<String, Object>> history = lane.getHistory();
         ObservableList<Map<String, Object>> data = FXCollections.observableArrayList(history);
         historyTable.setItems(data);
