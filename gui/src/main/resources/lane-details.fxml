@@ -28,7 +28,7 @@
             <TableView fx:id="historyTable" prefHeight="200" prefWidth="300">
                 <columns>
                     <TableColumn fx:id="densityColumn" text="Verkeersdichtheid"/>
-                    <TableColumn fx:id="timestampColumn" text="timestamp"/>
+                    <TableColumn fx:id="timestampColumn" text="Timestamp"/>
                 </columns>
             </TableView>
         </VBox>
