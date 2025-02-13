@@ -6,7 +6,6 @@ import com.mongodb.client.MongoCursor;
 import com.mongodb.client.MongoDatabase;
 import org.bson.Document;
 
-import java.sql.Time;
 import java.sql.Timestamp;
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -22,7 +21,7 @@ public class TrafficDensityService {
         this.collection = database.getCollection("traffic_data");
     }
 
-   public Lane getLaneTrafficData(Lane lane){
+   public Lane getLaneLatestTrafficData(Lane lane){
         Document latestData = collection.find(new Document("laneId", lane.getLaneId()))
                 .sort(new Document("timestamp", -1))
                 .first();

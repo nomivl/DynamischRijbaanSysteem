@@ -8,7 +8,7 @@
 
 <BorderPane xmlns="http://javafx.com/javafx/17"
             xmlns:fx="http://javafx.com/fxml/1"
-            fx:controller="com.dynamischrijbaansysteem.controllers.MainAppController">
+            fx:controller="com.dynamischrijbaansysteem.controllers.MainController">
     <top>
         <HBox fx:id="navbar" spacing="10">
             <Button text="Dashboard" onAction="#goToLanes"/>

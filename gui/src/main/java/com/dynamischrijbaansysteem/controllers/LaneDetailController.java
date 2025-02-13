@@ -2,6 +2,7 @@ package com.dynamischrijbaansysteem.controllers;
 
 import com.dynamischrijbaansysteem.Lane;
 import com.dynamischrijbaansysteem.LaneStatusService;
+import com.dynamischrijbaansysteem.interfaces.ServiceInjectable;
 import com.dynamischrijbaansysteem.view.DensityCell;
 import javafx.beans.Observable;
 import javafx.collections.FXCollections;
@@ -19,7 +20,7 @@ import java.util.Map;
 import java.util.Objects;
 import java.util.ResourceBundle;
 
-public class LaneDetailController implements Initializable {
+public class LaneDetailController implements Initializable, ServiceInjectable<Lane> {
     @FXML
     private GridPane laneDetailTable;
     @FXML
@@ -33,13 +34,15 @@ public class LaneDetailController implements Initializable {
 
     private Lane lane;
 
-    public void setContext(Lane lane){
-        this.lane = lane;
+    @Override
+    public void setContext(Lane context) {
+        this.lane = context;
         populateLaneDetailTable();
         locationLabel.setText(lane.getLocation());
         historyTable.setColumnResizePolicy(TableView.CONSTRAINED_RESIZE_POLICY);
         populateHistoryTable();
     }
+
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
 
@@ -64,8 +67,11 @@ public class LaneDetailController implements Initializable {
         densityColumn.setCellFactory(column -> new DensityCell());
 
         List<Map<String, Object>> history = lane.getHistory();
-        ObservableList<Map<String, Object>> data = FXCollections.observableArrayList(history);
-        historyTable.setItems(data);
+        if (history != null) {
+            ObservableList<Map<String, Object>> data = FXCollections.observableArrayList(history);
+            historyTable.setItems(data);
+        }
+
 
 
     }
