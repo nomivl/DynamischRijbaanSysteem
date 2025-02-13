@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import java.lang.*?>
+<?import java.util.*?>
+<?import javafx.scene.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+
+<BorderPane xmlns="http://javafx.com/javafx/17"
+            xmlns:fx="http://javafx.com/fxml/1"
+            fx:controller="com.dynamischrijbaansysteem.controllers.MainAppController">
+    <top>
+        <HBox fx:id="navbar" spacing="10">
+            <Button text="Dashboard" onAction="#goToLanes"/>
+            <Button text="Lanes" onAction="#goToLanes"/>
+        </HBox>
+    </top>
+    <center>
+
+    </center>
+</BorderPane>
