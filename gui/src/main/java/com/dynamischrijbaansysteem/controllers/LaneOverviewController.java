@@ -4,6 +4,8 @@ import com.dynamischrijbaansysteem.Lane;
 import com.dynamischrijbaansysteem.LaneStatus;
 import com.dynamischrijbaansysteem.LaneStatusService;
 import com.dynamischrijbaansysteem.MainApp;
+import com.dynamischrijbaansysteem.interfaces.ServiceInjectable;
+import com.dynamischrijbaansysteem.services.NavigationService;
 import javafx.animation.FadeTransition;
 import javafx.animation.KeyFrame;
 import javafx.animation.SequentialTransition;
@@ -29,7 +31,7 @@ import java.util.List;
 import java.util.Map;
 import java.util.ResourceBundle;
 
-public class LaneOverviewController implements Initializable {
+public class LaneOverviewController implements Initializable, ServiceInjectable<LaneStatusService> {
     private BorderPane laneOverviewLayout;
     // TO DO Final implementeren
     private  LaneStatusService laneStatusService;
@@ -46,7 +48,7 @@ public class LaneOverviewController implements Initializable {
     public LaneOverviewController() {
 
     }
-
+    @Override
     public void setContext(LaneStatusService laneStatusService) {
         this.laneStatusService = laneStatusService;
         populateLaneTable();
@@ -81,7 +83,7 @@ public class LaneOverviewController implements Initializable {
             timestampsLabels.put(id, timestampLabel);
 
             Button detailButton = new Button("Details");
-            detailButton.setOnAction( e -> showDetails(id));
+            detailButton.setOnAction(event -> NavigationService.getInstance().goToLaneDetails(id, lane));
             laneTable.add(idLabel,0,row);
             laneTable.add(locationLabel,1,row);
             laneTable.add(statusLabel,2,row);
