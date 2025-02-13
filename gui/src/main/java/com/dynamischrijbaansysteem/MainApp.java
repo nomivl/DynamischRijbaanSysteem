@@ -1,25 +1,16 @@
 package com.dynamischrijbaansysteem;
 
-import com.dynamischrijbaansysteem.controllers.LaneDetailController;
-import com.dynamischrijbaansysteem.controllers.LaneOverviewController;
-import com.dynamischrijbaansysteem.controllers.MainAppController;
+import com.dynamischrijbaansysteem.controllers.MainController;
 import com.dynamischrijbaansysteem.data.LaneService;
 import com.dynamischrijbaansysteem.data.TrafficDensityService;
 import javafx.application.Application;
 
-import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Node;
-import javafx.scene.Parent;
 import javafx.scene.Scene;
-import javafx.scene.control.Button;
-import javafx.scene.control.Label;
-import javafx.scene.layout.Border;
 import javafx.scene.layout.BorderPane;
-import javafx.scene.layout.HBox;
 import javafx.stage.Stage;
 
-import java.net.URL;
 import java.util.concurrent.Executors;
 import java.util.concurrent.ScheduledExecutorService;
 import java.util.concurrent.TimeUnit;
@@ -38,12 +29,8 @@ public class MainApp extends Application{
         try {
             FXMLLoader loader = new FXMLLoader(getClass().getResource("/main-app.fxml"));
             rootLayout = loader.load(); // Stel rootLayout in als het BorderPane uit Main.fxml
-            MainAppController controller = loader.getController();
-            if (controller != null) {
-                controller.setContext(laneService, laneStatusService, trafficDensityService);
-            }
-
-
+            MainController controller = loader.getController();
+            controller.setContext(laneStatusService);
         } catch (Exception e) {
             e.printStackTrace();
         }

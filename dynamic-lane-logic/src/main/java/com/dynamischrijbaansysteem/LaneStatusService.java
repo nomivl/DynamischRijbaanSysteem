@@ -1,10 +1,7 @@
 package com.dynamischrijbaansysteem;
-import com.dynamischrijbaansysteem.Lane;
-import com.dynamischrijbaansysteem.LaneStatus;
 import com.dynamischrijbaansysteem.data.LaneService;
 import com.dynamischrijbaansysteem.data.TrafficDensityService;
 
-import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -29,27 +26,21 @@ public class LaneStatusService {
             return LaneStatus.CLOSE_EXTRA_LANE;
         }
     }
-
+    // TO DO History via aparte method ophalen of niet?
     public List<Lane> getUpdatedLanes(){
         List<Lane> lanes = laneService.getLanes();
-        return lanes.stream().map(trafficDensityService::getLaneTrafficData).peek(lane -> lane.setLaneStatus(determineExtraLaneStatus(lane.getDensity()))).collect(Collectors.toList());
+        return lanes.stream().map(trafficDensityService::getLaneLatestTrafficData).peek(lane -> {
+            lane.setLaneStatus(determineExtraLaneStatus(lane.getDensity()));
+            lane.setHistory(trafficDensityService.getHistoryFromDB(lane.getLaneId()));
+        }).collect(Collectors.toList());
     }
 
     public Lane getUpdatedLane(Integer laneId) {
-        Lane lane = trafficDensityService.getLaneTrafficData(laneService.getLaneById(laneId));
+        Lane lane = trafficDensityService.getLaneLatestTrafficData(laneService.getLaneById(laneId));
         lane.setLaneStatus(determineExtraLaneStatus(lane.getDensity()));
         lane.setHistory(trafficDensityService.getHistoryFromDB(laneId));
         return lane;
 
-    }
-    public List<Lane> getUpdatedLanesOld(){
-        List<Lane> lanes = laneService.getLanes();
-        for (Lane lane : lanes) {
-            int density = trafficDensityService.getTrafficDensity(lane.getLaneId());
-            lane.setDensity(density);
-            lane.setLaneStatus(determineExtraLaneStatus(density));
-        }
-        return lanes;
     }
 
     public LaneStatus getLaneStatus(int laneId) {
