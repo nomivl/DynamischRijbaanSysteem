@@ -33,7 +33,7 @@ public class LaneDetailController implements Initializable {
 
     private Lane lane;
 
-    public void setLane(Lane lane){
+    public void setContext(Lane lane){
         this.lane = lane;
         populateLaneDetailTable();
         locationLabel.setText(lane.getLocation());

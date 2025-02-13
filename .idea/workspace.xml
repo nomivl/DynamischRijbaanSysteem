@@ -4,20 +4,15 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="5f4c1205-9544-43d9-ae34-6bc9ae1b8650" name="Changes" comment="">
-      <change afterPath="$PROJECT_DIR$/gui/src/main/java/com/dynamischrijbaansysteem/MainApp_V1.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/encodings.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/encodings.xml" afterDir="false" />
+    <list default="true" id="5f4c1205-9544-43d9-ae34-6bc9ae1b8650" name="Changes" comment="Lane overview with live updates">
+      <change afterPath="$PROJECT_DIR$/gui/src/main/java/com/dynamischrijbaansysteem/controllers/MainAppController.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/gui/src/main/java/com/dynamischrijbaansysteem/service/NavigationService.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/gui/src/main/resources/main-app.fxml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/common/src/main/java/com/dynamischrijbaansysteem/Lane.java" beforeDir="false" afterPath="$PROJECT_DIR$/common/src/main/java/com/dynamischrijbaansysteem/Lane.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/data-processor/src/main/java/com/dynamischrijbaansysteem/data/LaneService.java" beforeDir="false" afterPath="$PROJECT_DIR$/data-processor/src/main/java/com/dynamischrijbaansysteem/data/LaneService.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/data-processor/src/main/java/com/dynamischrijbaansysteem/data/TrafficDensityService.java" beforeDir="false" afterPath="$PROJECT_DIR$/data-processor/src/main/java/com/dynamischrijbaansysteem/data/TrafficDensityService.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/data-processor/src/test/java/com/dynamischrijbaansysteem/data/MongoDBConnectionTest.java" beforeDir="false" afterPath="$PROJECT_DIR$/data-processor/src/test/java/com/dynamischrijbaansysteem/data/MongoDBConnectionTest.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/dynamic-lane-logic/src/main/java/com/dynamischrijbaansysteem/LaneStatusService.java" beforeDir="false" afterPath="$PROJECT_DIR$/dynamic-lane-logic/src/main/java/com/dynamischrijbaansysteem/LaneStatusService.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/gui/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/gui/pom.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/gui/src/main/java/com/dynamischrijbaansysteem/MainApp.java" beforeDir="false" afterPath="$PROJECT_DIR$/gui/src/main/java/com/dynamischrijbaansysteem/MainApp.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/gui/src/main/java/com/dynamischrijbaansysteem/MainApp_V1.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/gui/src/main/java/com/dynamischrijbaansysteem/controllers/LaneDetailController.java" beforeDir="false" afterPath="$PROJECT_DIR$/gui/src/main/java/com/dynamischrijbaansysteem/controllers/LaneDetailController.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/gui/src/main/java/com/dynamischrijbaansysteem/controllers/LaneOverviewController.java" beforeDir="false" afterPath="$PROJECT_DIR$/gui/src/main/java/com/dynamischrijbaansysteem/controllers/LaneOverviewController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/traffic-simulator/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/traffic-simulator/pom.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/traffic-simulator/src/main/java/com/dynamischrijbaansysteem/TrafficSimulator.java" beforeDir="false" afterPath="$PROJECT_DIR$/traffic-simulator/src/main/java/com/dynamischrijbaansysteem/TrafficSimulator.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -27,6 +22,7 @@
   <component name="FileTemplateManagerImpl">
     <option name="RECENT_TEMPLATES">
       <list>
+        <option value="FxmlFile" />
         <option value="Class" />
       </list>
     </option>
@@ -38,6 +34,12 @@
       </map>
     </option>
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
+  </component>
+  <component name="HighlightingSettingsPerFile">
+    <setting file="jar://$USER_HOME$/.jdks/corretto-17.0.11/lib/src.zip!/java.base/java/lang/Object.java" root0="SKIP_INSPECTION" />
+    <setting file="jar://$MAVEN_REPOSITORY$/org/openjfx/javafx-controls/17.0.2/javafx-controls-17.0.2-win.jar!/javafx/scene/control/Cell.class" root0="SKIP_INSPECTION" />
+    <setting file="jar://$MAVEN_REPOSITORY$/org/openjfx/javafx-controls/17.0.2/javafx-controls-17.0.2-win.jar!/javafx/scene/control/TableColumn.class" root0="SKIP_INSPECTION" />
+    <setting file="jar://$MAVEN_REPOSITORY$/org/openjfx/javafx-fxml/17.0.2/javafx-fxml-17.0.2-win.jar!/javafx/fxml/FXMLLoader.class" root0="SKIP_INSPECTION" />
   </component>
   <component name="ProjectColorInfo">{
   &quot;associatedIndex&quot;: 3
@@ -52,7 +54,7 @@
   </component>
   <component name="PropertiesComponent"><![CDATA[{
   "keyToString": {
-    "Application.GUI.executor": "Run",
+    "Application.GUI.executor": "Debug",
     "Application.MainApp.executor": "Run",
     "Application.MongoDBConnection.executor": "Run",
     "Application.Traffic Simulator.executor": "Run",
@@ -78,14 +80,20 @@
     "node.js.selected.package.eslint": "(autodetect)",
     "node.js.selected.package.tslint": "(autodetect)",
     "nodejs_package_manager_path": "npm",
-    "project.structure.last.edited": "Project",
-    "project.structure.proportion": "0.0",
-    "project.structure.side.proportion": "0.0",
+    "project.structure.last.edited": "Modules",
+    "project.structure.proportion": "0.19066937",
+    "project.structure.side.proportion": "0.27425238",
     "settings.editor.selected.configurable": "preferences.lookFeel",
     "vue.rearranger.settings.migration": "true"
   }
 }]]></component>
   <component name="RecentsManager">
+    <key name="MoveFile.RECENT_KEYS">
+      <recent name="C:\Users\nomi.van.laarschot\Github\DynamischRijbaanSysteem\gui\src\main\resources" />
+      <recent name="C:\Users\nomi.van.laarschot\Github\DynamischRijbaanSysteem\gui\src\main\java\com\dynamischrijbaansysteem\resources" />
+      <recent name="C:\Users\nomi.van.laarschot\Github\DynamischRijbaanSysteem\gui\src\main" />
+      <recent name="C:\Users\nomi.van.laarschot\Github\DynamischRijbaanSysteem\gui\src\main\java\resources" />
+    </key>
     <key name="MoveClassesOrPackagesDialog.RECENTS_KEY">
       <recent name="com.dynamischrijbaansysteem" />
     </key>
@@ -110,21 +118,6 @@
       <toRun name="GUI" type="Application" />
       <toRun name="Traffic Simulator" type="Application" />
       <method v="2" />
-    </configuration>
-    <configuration name="LaneManagerTest" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
-      <module name="traffic-simulator" />
-      <extension name="coverage">
-        <pattern>
-          <option name="PATTERN" value="com.dynamischrijbaansysteem.controllers.*" />
-          <option name="ENABLED" value="true" />
-        </pattern>
-      </extension>
-      <option name="PACKAGE_NAME" value="com.dynamischrijbaansysteem" />
-      <option name="MAIN_CLASS_NAME" value="com.dynamischrijbaansysteem.LaneManagerTest" />
-      <option name="TEST_OBJECT" value="class" />
-      <method v="2">
-        <option name="Make" enabled="true" />
-      </method>
     </configuration>
     <configuration name="LaneStatusServiceTest" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
       <module name="dynamic-lane-logic" />
@@ -154,6 +147,21 @@
       <option name="MAIN_CLASS_NAME" value="com.dynamischrijbaansysteem.LaneStatusServiceTest" />
       <option name="METHOD_NAME" value="testGetLaneStatus" />
       <option name="TEST_OBJECT" value="method" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="MongoDBConnectionTest" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+      <module name="data-processor" />
+      <extension name="coverage">
+        <pattern>
+          <option name="PATTERN" value="com.dynamischrijbaansysteem.data.*" />
+          <option name="ENABLED" value="true" />
+        </pattern>
+      </extension>
+      <option name="PACKAGE_NAME" value="com.dynamischrijbaansysteem.data" />
+      <option name="MAIN_CLASS_NAME" value="com.dynamischrijbaansysteem.data.MongoDBConnectionTest" />
+      <option name="TEST_OBJECT" value="class" />
       <method v="2">
         <option name="Make" enabled="true" />
       </method>
@@ -194,7 +202,7 @@
       <item itemvalue="Application.GUI" />
       <item itemvalue="Application.Traffic Simulator" />
       <item itemvalue="Compound.Simulator + GUI" />
-      <item itemvalue="JUnit.LaneManagerTest" />
+      <item itemvalue="JUnit.MongoDBConnectionTest" />
       <item itemvalue="JUnit.MongoDBConnectionTest.testInsertAndRetrieveTrafficData" />
       <item itemvalue="JUnit.LaneStatusServiceTest" />
       <item itemvalue="JUnit.LaneStatusServiceTest.testGetLaneStatus" />
@@ -202,6 +210,7 @@
     </list>
     <recent_temporary>
       <list>
+        <item itemvalue="JUnit.MongoDBConnectionTest" />
         <item itemvalue="JUnit.MongoDBConnectionTest.testInsertAndRetrieveTrafficData" />
         <item itemvalue="JUnit.MongoDBConnectionTest.testInsertAndRetrieveLanes" />
         <item itemvalue="JUnit.LaneStatusServiceTest" />
@@ -220,8 +229,23 @@
       <workItem from="1737649561756" duration="2950000" />
       <workItem from="1737988492914" duration="7758000" />
       <workItem from="1738055579119" duration="25241000" />
-      <workItem from="1738834789328" duration="12247000" />
+      <workItem from="1738834789328" duration="14494000" />
+      <workItem from="1738919860013" duration="35000" />
+      <workItem from="1738940805116" duration="8203000" />
+      <workItem from="1739178843908" duration="937000" />
+      <workItem from="1739180582798" duration="29922000" />
+      <workItem from="1739289647791" duration="18773000" />
+      <workItem from="1739442982909" duration="4753000" />
     </task>
+    <task id="LOCAL-00001" summary="Lane overview with live updates">
+      <option name="closed" value="true" />
+      <created>1738856130460</created>
+      <option name="number" value="00001" />
+      <option name="presentableId" value="LOCAL-00001" />
+      <option name="project" value="LOCAL" />
+      <updated>1738856130460</updated>
+    </task>
+    <option name="localTasksCounter" value="2" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -273,5 +297,9 @@
         </entry>
       </map>
     </option>
+  </component>
+  <component name="VcsManagerConfiguration">
+    <MESSAGE value="Lane overview with live updates" />
+    <option name="LAST_COMMIT_MESSAGE" value="Lane overview with live updates" />
   </component>
 </project>

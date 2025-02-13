@@ -47,14 +47,15 @@ public class LaneOverviewController implements Initializable {
 
     }
 
-    public void setLaneStatusService(LaneStatusService laneStatusService) {
+    public void setContext(LaneStatusService laneStatusService) {
         this.laneStatusService = laneStatusService;
+        populateLaneTable();
+        startLiveUpdates();
     }
 
     public void setMainApp(MainApp mainApp) {
         this.mainApp = mainApp;
-        populateLaneTable();
-        startLiveUpdates();
+
     }
     private void populateLaneTable () {
 
@@ -145,10 +146,12 @@ public class LaneOverviewController implements Initializable {
         sequence.play();
 
     }
-
+ /*
     public void showDetails(Integer laneId) {
         mainApp.showDetails(laneId);
     }
+
+  */
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
