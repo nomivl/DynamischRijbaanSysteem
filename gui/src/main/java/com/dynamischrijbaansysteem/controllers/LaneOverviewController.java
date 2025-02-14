@@ -83,6 +83,7 @@ public class LaneOverviewController implements Initializable, ServiceInjectable<
             timestampsLabels.put(id, timestampLabel);
 
             Button detailButton = new Button("Details");
+            detailButton.getStyleClass().add("primary");
             detailButton.setOnAction(event -> NavigationService.getInstance().goToLaneDetails(id, lane));
             laneTable.add(idLabel,0,row);
             laneTable.add(locationLabel,1,row);
