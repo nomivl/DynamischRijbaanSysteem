@@ -9,11 +9,8 @@ import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Node;
 import javafx.scene.Scene;
-import javafx.scene.control.Button;
 import javafx.scene.layout.BorderPane;
 import javafx.stage.Stage;
-
-import java.io.IOException;
 import java.net.URISyntaxException;
 import java.nio.file.*;
 import java.util.concurrent.Executors;
@@ -41,19 +38,16 @@ public class MainApp extends Application{
             e.printStackTrace();
         }
 
-        Button button = new Button("Reload");
-        rootLayout.setBottom(button);
-
         Scene scene = new Scene(rootLayout, 800, 600);
 
-        String cssPath = getCSSPath();
+
+        Path cssPath = getCSSPath();
         reloadCSS(scene, cssPath);
 
         primaryStage.setScene(scene);
         primaryStage.show();
 
-        button.setOnAction(event -> reloadCSS(scene, cssPath));
-        watchCSSFile(cssPath, scene);
+        if (inAppDevMode()) watchCSSFile(cssPath, scene);
     }
 
     /**
@@ -82,23 +76,28 @@ public class MainApp extends Application{
         }
     }
 
-    private String getCSSPath(){
-        String defaultPath = getClass().getResource("/style.css").toExternalForm().replace("file:///","");
-        if (config.getProperty("app.mode", "production").equalsIgnoreCase("development")){
-            return config.getProperty("css.path", defaultPath);
+    private Path getCSSPath() throws URISyntaxException {
+        Path defaultPath = Paths.get(getClass().getResource("/style.css").toURI());
+        if (inAppDevMode()){
+            String CSSPath = config.getProperty("css.path", null);
+            if (CSSPath != null) {
+                return Paths.get(CSSPath);
+            }
         }
         return defaultPath;
-
     }
-    private void reloadCSS(Scene scene, String cssPath) {
+    private Boolean inAppDevMode() {
+        return config.getProperty("app.mode", "production").equalsIgnoreCase("development");
+    }
+    private void reloadCSS(Scene scene, Path cssPath) {
         scene.getStylesheets().clear();
-        scene.getStylesheets().add("file:///" + cssPath);
+        scene.getStylesheets().add(cssPath.toUri().toString());
         System.out.println("CSS reloaded");
     }
 
-    private void watchCSSFile(String cssPath, Scene scene) {
+    private void watchCSSFile(Path cssPath, Scene scene) {
         try {
-            Path path = Paths.get(cssPath);
+            Path path = Paths.get(cssPath.toUri());
             WatchService watchService = FileSystems.getDefault().newWatchService();
             path.getParent().register(watchService, StandardWatchEventKinds.ENTRY_MODIFY);
 
