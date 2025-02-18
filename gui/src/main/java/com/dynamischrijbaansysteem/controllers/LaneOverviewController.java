@@ -68,6 +68,7 @@ public class LaneOverviewController implements Initializable, ServiceInjectable<
             Integer id = lane.getLaneId();
 
             Label idLabel = new Label(lane.getLaneId().toString());
+            idLabel.getStyleClass().add("table-id");
             idLabels.put(id, idLabel);
 
             Label locationLabel = new Label(lane.getLocation());
@@ -129,7 +130,7 @@ public class LaneOverviewController implements Initializable, ServiceInjectable<
     }
 
     public void highlightUpdate(Label label, String Colour) {
-        label.setStyle("-fx-background-color: "+ Colour);
+        label.setStyle("-fx-text-fill: "+ Colour);
 
         // Maak een fade-out effect
         FadeTransition fadeOut = new FadeTransition(Duration.seconds(1),label);

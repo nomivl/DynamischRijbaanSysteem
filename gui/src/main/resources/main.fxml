@@ -10,11 +10,18 @@
             xmlns:fx="http://javafx.com/fxml/1"
             fx:controller="com.dynamischrijbaansysteem.controllers.MainController">
     <top>
-        <HBox fx:id="navbar" spacing="10">
+
+    </top>
+    <left>
+        <VBox styleClass="menu">
+            <VBox styleClass="brand">
+                    <Label styleClass="logo" text="DRS"/>
+                    <Label styleClass="tagline" text="systeem"/>
+            </VBox>
             <Button text="Dashboard" onAction="#goToLanes"/>
             <Button text="Lanes" onAction="#goToLanes"/>
-        </HBox>
-    </top>
+        </VBox>
+    </left>
     <center>
 
     </center>

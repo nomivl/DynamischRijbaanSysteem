@@ -7,15 +7,16 @@
 
 <BorderPane xmlns="http://javafx.com/javafx/17"
             xmlns:fx="http://javafx.com/fxml/1"
-            fx:controller="com.dynamischrijbaansysteem.controllers.LaneOverviewController">
+            fx:controller="com.dynamischrijbaansysteem.controllers.LaneOverviewController"
+            styleClass="container">
     <center>
-        <GridPane fx:id="laneTable" hgap="10" vgap="10">
-            <Label text="Id" GridPane.columnIndex="0" GridPane.rowIndex="0"/>
-            <Label text="Lane" GridPane.columnIndex="1" GridPane.rowIndex="0"/>
-            <Label text="Status" GridPane.columnIndex="2" GridPane.rowIndex="0"/>
-            <Label text="Density" GridPane.columnIndex="3" GridPane.rowIndex="0"/>
-            <Label text="Timestamp" GridPane.columnIndex="4" GridPane.rowIndex="0"/>
-            <Label text="Details" GridPane.columnIndex="5" GridPane.rowIndex="0"/>
+        <GridPane fx:id="laneTable" hgap="10" vgap="10" styleClass="lane-table">
+            <Label text="Id" styleClass="table-heading" GridPane.columnIndex="0" GridPane.rowIndex="0"/>
+            <Label text="Lane" styleClass="table-heading" GridPane.columnIndex="1" GridPane.rowIndex="0"/>
+            <Label text="Status" styleClass="table-heading" GridPane.columnIndex="2" GridPane.rowIndex="0"/>
+            <Label text="Density" styleClass="table-heading" GridPane.columnIndex="3" GridPane.rowIndex="0"/>
+            <Label text="Timestamp" styleClass="table-heading" GridPane.columnIndex="4" GridPane.rowIndex="0"/>
+            <Label text="Details" styleClass="table-heading" GridPane.columnIndex="5" GridPane.rowIndex="0"/>
         </GridPane>
     </center>
 </BorderPane>
