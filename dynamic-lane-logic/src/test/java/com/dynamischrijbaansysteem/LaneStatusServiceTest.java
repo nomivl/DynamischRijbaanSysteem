@@ -28,7 +28,7 @@ public class LaneStatusServiceTest {
 
     @Test
     public void testGetLaneStatus() {
-        laneService.insertLane(10 , "Test Lane");
+        laneService.insertLane(10 , "Test Lane", true);
         System.out.println(laneStatusService.getLaneStatus(10));
 
     }

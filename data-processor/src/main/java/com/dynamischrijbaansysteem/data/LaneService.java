@@ -4,6 +4,8 @@ import com.dynamischrijbaansysteem.LaneStatus;
 import com.mongodb.client.MongoCollection;
 import com.mongodb.client.MongoDatabase;
 import org.bson.Document;
+import static com.mongodb.client.model.Filters.eq;
+
 
 import java.util.ArrayList;
 import java.util.Collection;
@@ -15,10 +17,11 @@ public class LaneService {
         MongoDatabase database = MongoDBConnection.getDatabase();
         this.laneCollection = database.getCollection("lanes");
     }
-    public void insertLane(int laneId, String location){
+    public void insertLane(int laneId, String location, Boolean dynamicLaneControl){
         Document document = new Document()
                 .append("laneId", laneId)
                 .append("location", location)
+                .append("dynamicLaneControl", dynamicLaneControl)
                 .append("created", System.currentTimeMillis());
         laneCollection.insertOne(document);
     }
@@ -30,7 +33,8 @@ public class LaneService {
 
             int laneId = doc.getInteger("laneId");
             String location = doc.getString("location");
-            lanes.add(new Lane(laneId, location));
+            Boolean dynamicLaneControl = doc.getBoolean("dynamicLaneControl");
+            lanes.add(new Lane(laneId, location, dynamicLaneControl));
         }
         return lanes;
     }
@@ -40,10 +44,16 @@ public class LaneService {
 
         if(laneDoc != null){
             String location = laneDoc.getString("location");
-            return new Lane(laneId,location);
+            Boolean dynamicLaneControl = laneDoc.getBoolean("dynamicLaneControl");
+            return new Lane(laneId,location,dynamicLaneControl);
         } else {
             throw new IllegalArgumentException("Lane with ID " + laneId + " not found.");
         }
+    }
+
+    public void updateDynamicLaneControl (Integer laneId, Boolean dynamicLaneControl) {
+        laneCollection.updateOne(eq("laneId", laneId), new Document("$set", new Document("dynamicLaneControl", dynamicLaneControl)));
+        System.out.print("DynamicLaneControl updated for "+ laneId.toString() + ":" + dynamicLaneControl.toString());
     }
 
 }

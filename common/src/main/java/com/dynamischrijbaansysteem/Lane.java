@@ -12,10 +12,17 @@ public class Lane {
     private int density;
     private Timestamp timestamp;
     private LaneStatus laneStatus;
+    private Boolean dynamicLaneControl;
     private List<Map<String,Object>> history;
     public Lane(int laneId, String location) {
         this.laneId = laneId;
         this.location = location;
+        this.dynamicLaneControl = true;
+    }
+    public Lane(int laneId, String location, Boolean dynamicLaneControl) {
+        this.laneId = laneId;
+        this.location = location;
+        this.dynamicLaneControl = dynamicLaneControl;
     }
 
     public Lane(int laneId, String location, int density, LaneStatus laneStatus) {
@@ -65,7 +72,12 @@ public class Lane {
     public List<Map<String, Object>> getHistory() {
         return history;
     }
-
+    public Boolean getDynamicLaneControl(){
+        return dynamicLaneControl;
+    }
+    public void setDynamicLaneControl(Boolean dynamicLaneControl){
+        this.dynamicLaneControl = dynamicLaneControl;
+    }
     public void setHistory(List<Map<String, Object>> history) {
         this.history = history;
     }
