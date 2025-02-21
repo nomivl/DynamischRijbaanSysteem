@@ -3,12 +3,19 @@ version: '3.8'
 services:
   mongo:
     image: mongo
-    container_name: DynamischRijbaanSysteem
+    container_name: mongo-dynamischrijbaansysteem
     ports:
       - "27017:27017"
     volumes:
       - DynamischRijbaanSysteem_data:/data/db
     restart: no
-
+  karaf:
+    image: apache/karaf:4.4.2
+    container_name: karaf-dynamischrijbaansysteem
+    ports:
+      - "8101:8101"
+    depends_on:
+      - mongo
+    restart: no
 volumes:
   DynamischRijbaanSysteem_data:
