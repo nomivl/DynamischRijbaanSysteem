@@ -18,23 +18,55 @@
       <artifactId>junit-jupiter</artifactId>
       <scope>test</scope>
     </dependency>
-      <dependency>
-          <groupId>com.dynamischrijbaansysteem</groupId>
-          <artifactId>data-processor</artifactId>
-          <version>1.0-SNAPSHOT</version>
-          <scope>compile</scope>
-      </dependency>
-      <dependency>
-          <groupId>com.dynamischrijbaansysteem</groupId>
-          <artifactId>dynamic-lane-logic</artifactId>
-          <version>1.0-SNAPSHOT</version>
-          <scope>test</scope>
-      </dependency>
-      <dependency>
-          <groupId>com.dynamischrijbaansysteem</groupId>
-          <artifactId>dynamic-lane-logic</artifactId>
-          <version>1.0-SNAPSHOT</version>
-          <scope>compile</scope>
-      </dependency>
+    <dependency>
+      <groupId>org.osgi</groupId>
+      <artifactId>org.osgi.service.component.annotations</artifactId>
+      <version>1.4.0</version>
+      <scope>provided</scope>
+    </dependency>
+    <dependency>
+      <groupId>org.apache.activemq</groupId>
+      <artifactId>activemq-client</artifactId>
+      <version>5.18.2</version>
+    </dependency>
   </dependencies>
+    <build>
+        <plugins>
+            <!-- Plugin die zorgt dat Maven een OSGi-bundle maakt -->
+            <plugin>
+                <groupId>org.apache.felix</groupId>
+                <artifactId>maven-bundle-plugin</artifactId>
+                <version>5.1.6</version>
+                <extensions>true</extensions>
+                <configuration>
+                    <instructions>
+                        <Bundle-SymbolicName>${project.groupId}.${project.artifactId}</Bundle-SymbolicName>
+                        <Bundle-Name>${project.name}</Bundle-Name>
+                        <Bundle-Version>${project.version}</Bundle-Version>
+                        <Export-Package>com.dynamischrijbaansysteem.traffic.simulator</Export-Package>
+                        <Import-Package>*</Import-Package>
+                    </instructions>
+                </configuration>
+                <executions>
+                    <execution>
+                        <id>bundle-manifest</id>
+                        <phase>package</phase>
+                        <goals>
+                            <goal>manifest</goal>
+                            <goal>bundle</goal>
+                        </goals>
+                    </execution>
+                </executions>
+            </plugin>
+
+            <!-- Plugin die Karaf ondersteunt bij het bouwen van de bundle -->
+            <plugin>
+                <groupId>org.apache.karaf.tooling</groupId>
+                <artifactId>karaf-maven-plugin</artifactId>
+                <version>4.4.2</version>
+                <extensions>true</extensions>
+            </plugin>
+        </plugins>
+    </build>
+
 </project>

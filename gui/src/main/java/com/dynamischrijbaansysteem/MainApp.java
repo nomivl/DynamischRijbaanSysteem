@@ -22,12 +22,10 @@ public class MainApp extends Application{
     private final ConfigLoader config = new ConfigLoader();
     private final LaneService laneService  = new LaneService();
     private final LaneStatusService laneStatusService = new LaneStatusService(laneService, trafficDensityService);
-    private final TrafficSimulator trafficSimulator = new TrafficSimulator(laneService, trafficDensityService);
     private ScheduledExecutorService scheduler;
     private static BorderPane rootLayout;
     @Override
     public void start(Stage primaryStage) throws Exception {
-        startTrafficSimulation();
         primaryStage.setTitle("Dynamisch Rijbaansysteem");
         try {
             FXMLLoader loader = new FXMLLoader(getClass().getResource("/main.fxml"));
@@ -57,14 +55,6 @@ public class MainApp extends Application{
     public static void setCenterContent(Node content) {
         rootLayout.setCenter(content);
     }
-
-    private void startTrafficSimulation() {
-        scheduler = Executors.newScheduledThreadPool(1);
-        scheduler.scheduleAtFixedRate(() -> {
-            trafficSimulator.generateTrafficData();
-        }, 0,5, TimeUnit.SECONDS);
-    }
-
     public static void main(String[] args) {
         launch(args);
     }
