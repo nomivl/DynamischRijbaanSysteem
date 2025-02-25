@@ -29,6 +29,12 @@
       <artifactId>activemq-client</artifactId>
       <version>5.18.2</version>
     </dependency>
+      <dependency>
+          <groupId>org.apache.karaf.features</groupId>
+          <artifactId>org.apache.karaf.features.core</artifactId>
+          <version>4.4.3</version>
+          <scope>compile</scope>
+      </dependency>
   </dependencies>
     <build>
         <plugins>
