@@ -1,6 +1,7 @@
 package org.dynamischrijbaansysteem;
 import javax.jms.*;
 
+import com.dynamischrijbaansysteem.utils.ConfigLoader;
 import com.fasterxml.jackson.core.ObjectCodec;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import org.apache.activemq.ActiveMQConnectionFactory;
@@ -10,33 +11,40 @@ import org.dynamischrijbaansysteem.models.TrafficData;
 public class TrafficDataConsumer {
     private static final String BROKER_URL = "tcp://localhost:61616";
     private static final String QUEUE_NAME = "traffic.data";
+    private static final ConfigLoader config = new ConfigLoader();
     public static void main(String[] args) throws Exception {
-        ConnectionFactory factory = new ActiveMQConnectionFactory(BROKER_URL);
+        ConnectionFactory factory = new ActiveMQConnectionFactory(config.getProperty("activemq.url", BROKER_URL));
         ActiveMQConnectionFactory amqConnectionFactory  = (ActiveMQConnectionFactory) factory;
-        amqConnectionFactory.setUserName("karaf");
-        amqConnectionFactory.setPassword("karaf");
+
+        amqConnectionFactory.setUserName(config.getProperty("karaf.username", "karaf"));
+        amqConnectionFactory.setPassword(config.getProperty("karaf.password","karaf"));
         Connection connection = factory.createConnection();
         connection.start();
 
         Session session = connection.createSession(false, Session.AUTO_ACKNOWLEDGE);
-        Destination destination = session.createQueue(QUEUE_NAME);
+        Destination destination = session.createQueue(config.getProperty("activemq.queue",QUEUE_NAME));
         MessageConsumer consumer = session.createConsumer(destination);
+        consumer.setMessageListener(new TrafficMessageListener());
 
+        System.out.println("Verbonden met ActiveMQ en luistert op " + QUEUE_NAME);
+    }
 
-        System.out.println("Consumer verbonden met ActiveMQ en luistert op " + QUEUE_NAME);
-        ObjectMapper objectMapper = new ObjectMapper();
+    static class TrafficMessageListener implements MessageListener {
+        private final ObjectMapper objectMapper = new ObjectMapper();
 
-        while (true) {
-            Message message = consumer.receive();
-            if (message instanceof TextMessage) {
-                String json = ((TextMessage) message).getText();
-                TrafficData trafficData = objectMapper.readValue(json, TrafficData.class);
-                System.out.println("Ontvangen bericht: " + json);
-            } else {
-                System.err.println("Onbekend berichttype ontvangen: " + message.getClass().getSimpleName());
+        @Override
+        public void onMessage(Message message) {
+            try {
+                if (message instanceof TextMessage) {
+                    String json = ((TextMessage) message).getText();
+                    TrafficData trafficData = objectMapper.readValue(json, TrafficData.class);
+                    System.out.println(json);
+                } else {
+                    System.err.println("Onbekend bericht type ontvangen: "+ message.getClass().getSimpleName());
+                }
+            } catch (Exception e) {
+                System.err.println("Fout bij verwerken van bericht: " + e.getMessage());
             }
         }
-
-        // connection.close();
     }
 }
