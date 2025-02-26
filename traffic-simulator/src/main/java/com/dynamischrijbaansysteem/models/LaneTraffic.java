@@ -1,16 +1,15 @@
 package com.dynamischrijbaansysteem.models;
 
 import java.io.Serializable;
-import java.security.Timestamp;
 import java.sql.Time;
 
-public class TrafficData implements Serializable {
+public class LaneTraffic implements Serializable {
     private static final long serialVersionUID = 1L;
     private Integer laneId;
     private Integer density;
     private Long timestamp;
 
-    public TrafficData(Integer laneId, Integer density, Long timestamp) {
+    public LaneTraffic(Integer laneId, Integer density, Long timestamp) {
         this.laneId = laneId;
         this.density = density;
         this.timestamp = timestamp;

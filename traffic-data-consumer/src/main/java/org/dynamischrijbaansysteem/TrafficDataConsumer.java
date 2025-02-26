@@ -1,17 +1,18 @@
 package org.dynamischrijbaansysteem;
 import javax.jms.*;
 
+import com.dynamischrijbaansysteem.services.LaneTrafficService;
 import com.dynamischrijbaansysteem.utils.ConfigLoader;
-import com.fasterxml.jackson.core.ObjectCodec;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import org.apache.activemq.ActiveMQConnectionFactory;
-import org.dynamischrijbaansysteem.models.TrafficData;
+import com.dynamischrijbaansysteem.models.LaneTraffic;
 
 
 public class TrafficDataConsumer {
     private static final String BROKER_URL = "tcp://localhost:61616";
     private static final String QUEUE_NAME = "traffic.data";
     private static final ConfigLoader config = new ConfigLoader();
+    private static final LaneTrafficService  laneTrafficService = new LaneTrafficService();
     public static void main(String[] args) throws Exception {
         ConnectionFactory factory = new ActiveMQConnectionFactory(config.getProperty("activemq.url", BROKER_URL));
         ActiveMQConnectionFactory amqConnectionFactory  = (ActiveMQConnectionFactory) factory;
@@ -37,7 +38,8 @@ public class TrafficDataConsumer {
             try {
                 if (message instanceof TextMessage) {
                     String json = ((TextMessage) message).getText();
-                    TrafficData trafficData = objectMapper.readValue(json, TrafficData.class);
+                    LaneTraffic laneTraffic = objectMapper.readValue(json, LaneTraffic.class);
+                    laneTrafficService.insertLaneTraffic(laneTraffic);
                     System.out.println(json);
                 } else {
                     System.err.println("Onbekend bericht type ontvangen: "+ message.getClass().getSimpleName());

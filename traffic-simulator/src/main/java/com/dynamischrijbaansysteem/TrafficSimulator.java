@@ -1,11 +1,10 @@
 package com.dynamischrijbaansysteem;
-import com.dynamischrijbaansysteem.models.TrafficData;
+import com.dynamischrijbaansysteem.models.LaneTraffic;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import org.apache.activemq.ActiveMQConnectionFactory;
 import org.osgi.service.component.annotations.Activate;
 import org.osgi.service.component.annotations.Component;
 import javax.jms.*;
-import org.apache.activemq.ActiveMQConnectionFactory;
 
 import javax.jms.ConnectionFactory;
 
@@ -34,7 +33,7 @@ public class TrafficSimulator {
             ObjectMapper objectMapper = new ObjectMapper();
             // Simuleer verkeersdata
             for(int i = 1; i<=10; i++) {
-                TrafficData traffic = new TrafficData(1, i, System.currentTimeMillis());
+                LaneTraffic traffic = new LaneTraffic(1, i, System.currentTimeMillis());
                 String jsonMessage = objectMapper.writeValueAsString(traffic);
                 String message = "Traffic update " + jsonMessage;
                 TextMessage objectMessage = session.createTextMessage(jsonMessage);
