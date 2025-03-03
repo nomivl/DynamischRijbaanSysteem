@@ -1,4 +1,6 @@
-package com.dynamischrijbaansysteem;
+package com.dynamischrijbaansysteem.models;
+
+import com.dynamischrijbaansysteem.models.LaneTraffic;
 
 import java.sql.Time;
 import java.sql.Timestamp;
@@ -9,11 +11,9 @@ import java.util.Objects;
 public class Lane {
     private int laneId;
     private String location;
-    private int density;
-    private Timestamp timestamp;
-    private LaneStatus laneStatus;
+    private LaneTraffic laneTraffic;
     private Boolean dynamicLaneControl;
-    private List<Map<String,Object>> history;
+    private List<Map<String,LaneTraffic>> history;
     public Lane(int laneId, String location) {
         this.laneId = laneId;
         this.location = location;
@@ -25,11 +25,10 @@ public class Lane {
         this.dynamicLaneControl = dynamicLaneControl;
     }
 
-    public Lane(int laneId, String location, int density, LaneStatus laneStatus) {
+    public Lane(int laneId, String location, LaneTraffic laneTraffic) {
         this.laneId = laneId;
         this.location = location;
-        this.density = density;
-        this.laneStatus = laneStatus;
+        this.laneTraffic = laneTraffic;
     }
 
     public Integer getLaneId() {
@@ -48,46 +47,35 @@ public class Lane {
         this.location = location;
     }
 
-    public Integer getDensity() {
-        return density;
-    }
-
-    public void setDensity(int density) {
-        this.density = density;
-    }
-
-    public LaneStatus getLaneStatus() {
-        return laneStatus;
-    }
-
-    public void setLaneStatus(LaneStatus laneStatus) {
-        this.laneStatus = laneStatus;
-    }
-    public Timestamp getTimestamp(){
-        return this.timestamp;
-    }
-    public void setTimestamp(Timestamp timestamp){
-        this.timestamp = timestamp;
-    }
-    public List<Map<String, Object>> getHistory() {
-        return history;
-    }
     public Boolean getDynamicLaneControl(){
         return dynamicLaneControl;
     }
     public void setDynamicLaneControl(Boolean dynamicLaneControl){
         this.dynamicLaneControl = dynamicLaneControl;
     }
-    public void setHistory(List<Map<String, Object>> history) {
+    public void setHistory(List<Map<String, LaneTraffic>> history) {
         this.history = history;
     }
+
+    public List<Map<String, LaneTraffic>> getHistory() {
+        return history;
+    }
+
+    public LaneTraffic getLaneTraffic() {
+        return laneTraffic;
+    }
+
+    public void setLaneTraffic(LaneTraffic laneTraffic) {
+        this.laneTraffic = laneTraffic;
+    }
+
     @Override
     public String toString() {
         return "Lane{" +
                 "laneId=" + laneId +
                 ", location='" + location + '\'' +
-                ", density=" + density +
-                ", laneStatus=" + laneStatus +
+                ", density=" + laneTraffic.getDensity() +
+                ", laneStatus=" + laneTraffic.getLaneStatus() +
                 '}';
     }
 }

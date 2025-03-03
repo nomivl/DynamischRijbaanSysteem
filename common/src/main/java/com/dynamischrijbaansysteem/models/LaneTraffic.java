@@ -1,5 +1,7 @@
 package com.dynamischrijbaansysteem.models;
 
+import com.dynamischrijbaansysteem.LaneStatus;
+
 import java.io.Serializable;
 import java.sql.Time;
 
@@ -8,8 +10,19 @@ public class LaneTraffic implements Serializable {
     private Integer laneId;
     private Integer density;
     private Long timestamp;
-    public LaneTraffic() {
+    private LaneStatus laneStatus;
+    private String comment;
 
+    // Lege constructor voor JSON-serializer
+    public LaneTraffic () {
+
+    }
+    public LaneTraffic(Integer laneId, Integer density, Long timestamp, LaneStatus laneStatus, String comment) {
+        this.laneId = laneId;
+        this.density = density;
+        this.timestamp = timestamp;
+        this.laneStatus = laneStatus;
+        this.comment = comment;
     }
 
     public LaneTraffic(Integer laneId, Integer density, Long timestamp) {
@@ -40,6 +53,21 @@ public class LaneTraffic implements Serializable {
 
     public void setTimestamp(Long timestamp) {
         this.timestamp = timestamp;
+    }
+    public LaneStatus getLaneStatus() {
+        return laneStatus;
+    }
+
+    public void setLaneStatus(LaneStatus laneStatus) {
+        this.laneStatus = laneStatus;
+    }
+
+    public String getComment() {
+        return comment;
+    }
+
+    public void setComment(String comment) {
+        this.comment = comment;
     }
 
     @Override

@@ -1,8 +1,9 @@
 package com.dynamischrijbaansysteem;
 
 import com.dynamischrijbaansysteem.controllers.MainController;
-import com.dynamischrijbaansysteem.data.LaneService;
-import com.dynamischrijbaansysteem.data.TrafficDensityService;
+import com.dynamischrijbaansysteem.models.LaneTraffic;
+import com.dynamischrijbaansysteem.services.LaneService;
+import com.dynamischrijbaansysteem.services.LaneTrafficService;
 import com.dynamischrijbaansysteem.utils.ConfigLoader;
 import javafx.application.Application;
 
@@ -11,18 +12,19 @@ import javafx.scene.Node;
 import javafx.scene.Scene;
 import javafx.scene.layout.BorderPane;
 import javafx.stage.Stage;
+import org.dynamischrijbaansysteem.TrafficDataConsumer;
+
 import java.net.URISyntaxException;
 import java.nio.file.*;
-import java.util.concurrent.Executors;
 import java.util.concurrent.ScheduledExecutorService;
-import java.util.concurrent.TimeUnit;
 
 public class MainApp extends Application{
-    private final TrafficDensityService trafficDensityService = new TrafficDensityService();
     private final ConfigLoader config = new ConfigLoader();
     private final LaneService laneService  = new LaneService();
-    private final LaneStatusService laneStatusService = new LaneStatusService(laneService, trafficDensityService);
+    private final LaneTrafficService laneTrafficService = new LaneTrafficService();
+    private final LaneManager laneManager  = new LaneManager(laneService,laneTrafficService);
     private ScheduledExecutorService scheduler;
+    private TrafficDataConsumer trafficDataConsumer;
     private static BorderPane rootLayout;
     @Override
     public void start(Stage primaryStage) throws Exception {
@@ -31,7 +33,8 @@ public class MainApp extends Application{
             FXMLLoader loader = new FXMLLoader(getClass().getResource("/main.fxml"));
             rootLayout = loader.load(); // Stel rootLayout in als het BorderPane uit Main.fxml
             MainController controller = loader.getController();
-            controller.setContext(laneStatusService);
+            controller.setContext(laneManager);
+
         } catch (Exception e) {
             e.printStackTrace();
         }
@@ -44,6 +47,7 @@ public class MainApp extends Application{
 
         primaryStage.setScene(scene);
         primaryStage.show();
+        TrafficDataConsumer.start();
 
         if (inAppDevMode()) watchCSSFile(cssPath, scene);
     }

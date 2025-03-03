@@ -11,7 +11,6 @@
   <modules>
     <module>traffic-simulator</module>
     <module>data-processor</module>
-    <module>dynamic-lane-logic</module>
     <module>gui</module>
     <module>logging</module>
     <module>common</module>

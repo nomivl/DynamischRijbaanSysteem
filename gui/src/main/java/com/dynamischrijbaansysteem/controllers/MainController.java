@@ -1,8 +1,7 @@
 package com.dynamischrijbaansysteem.controllers;
 
-import com.dynamischrijbaansysteem.LaneStatusService;
-import com.dynamischrijbaansysteem.data.LaneService;
-import com.dynamischrijbaansysteem.data.TrafficDensityService;
+import com.dynamischrijbaansysteem.LaneManager;
+import com.dynamischrijbaansysteem.services.LaneStatusService;
 import com.dynamischrijbaansysteem.interfaces.ServiceInjectable;
 import com.dynamischrijbaansysteem.services.NavigationService;
 import javafx.fxml.FXML;
@@ -11,19 +10,19 @@ import javafx.fxml.Initializable;
 import java.net.URL;
 import java.util.ResourceBundle;
 
-public class MainController implements Initializable, ServiceInjectable<LaneStatusService> {
-    private LaneStatusService laneStatusService;
+public class MainController implements Initializable, ServiceInjectable<LaneManager> {
+    private LaneManager laneManager;
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
     }
 
     @FXML public void goToLanes(){
-        NavigationService.getInstance().goToLanes(this.laneStatusService);
+        NavigationService.getInstance().goToLanes(this.laneManager);
     }
 
     @Override
-    public void setContext(LaneStatusService context) {
-        this.laneStatusService = context;
+    public void setContext(LaneManager laneManager) {
+        this.laneManager = laneManager;
     }
 
 }

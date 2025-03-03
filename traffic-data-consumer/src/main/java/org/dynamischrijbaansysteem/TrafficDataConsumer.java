@@ -1,6 +1,7 @@
 package org.dynamischrijbaansysteem;
 import javax.jms.*;
 
+import com.dynamischrijbaansysteem.services.LaneStatusService;
 import com.dynamischrijbaansysteem.services.LaneTrafficService;
 import com.dynamischrijbaansysteem.utils.ConfigLoader;
 import com.fasterxml.jackson.databind.ObjectMapper;
@@ -13,7 +14,10 @@ public class TrafficDataConsumer {
     private static final String QUEUE_NAME = "traffic.data";
     private static final ConfigLoader config = new ConfigLoader();
     private static final LaneTrafficService  laneTrafficService = new LaneTrafficService();
-    public static void main(String[] args) throws Exception {
+    private static final LaneStatusService laneStatusService = new LaneStatusService();
+
+
+    public static void start() throws Exception {
         ConnectionFactory factory = new ActiveMQConnectionFactory(config.getProperty("activemq.url", BROKER_URL));
         ActiveMQConnectionFactory amqConnectionFactory  = (ActiveMQConnectionFactory) factory;
 
@@ -39,6 +43,7 @@ public class TrafficDataConsumer {
                 if (message instanceof TextMessage) {
                     String json = ((TextMessage) message).getText();
                     LaneTraffic laneTraffic = objectMapper.readValue(json, LaneTraffic.class);
+                    laneTraffic.setLaneStatus(laneStatusService.determineExtraLaneStatus(laneTraffic.getDensity()));
                     laneTrafficService.insertLaneTraffic(laneTraffic);
                     System.out.println(json);
                 } else {

@@ -1,21 +1,13 @@
 package com.dynamischrijbaansysteem.services;
 
-import com.dynamischrijbaansysteem.Lane;
-import com.dynamischrijbaansysteem.LaneStatusService;
+import com.dynamischrijbaansysteem.LaneManager;
+import com.dynamischrijbaansysteem.models.Lane;
 import com.dynamischrijbaansysteem.MainApp;
-import com.dynamischrijbaansysteem.controllers.LaneDetailController;
-import com.dynamischrijbaansysteem.controllers.LaneOverviewController;
-import com.dynamischrijbaansysteem.data.LaneService;
-import com.dynamischrijbaansysteem.data.TrafficDensityService;
 import com.dynamischrijbaansysteem.interfaces.ServiceInjectable;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.layout.BorderPane;
 
 public class NavigationService {
-    private LaneService laneService;
-    private LaneStatusService laneStatusService;
-    private TrafficDensityService trafficDensityService;
-    private Lane lane;
     private static NavigationService instance;
 
     public <T> void goToLanes(T context) {

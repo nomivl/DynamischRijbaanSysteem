@@ -33,7 +33,7 @@ public class TrafficSimulator {
             ObjectMapper objectMapper = new ObjectMapper();
             // Simuleer verkeersdata
             for(int i = 1; i<=10; i++) {
-                LaneTraffic traffic = new LaneTraffic(1, i, System.currentTimeMillis());
+               LaneTraffic traffic = new LaneTraffic(1, i, System.currentTimeMillis());
                 String jsonMessage = objectMapper.writeValueAsString(traffic);
                 String message = "Traffic update " + jsonMessage;
                 TextMessage objectMessage = session.createTextMessage(jsonMessage);

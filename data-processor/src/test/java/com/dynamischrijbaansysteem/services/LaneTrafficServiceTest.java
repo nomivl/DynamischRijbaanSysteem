@@ -10,7 +10,7 @@ public class LaneTrafficServiceTest {
     public void testInsertTrafficData(){
         LaneTraffic laneTraffic = new LaneTraffic(1,10,System.currentTimeMillis());
         laneTrafficService.insertLaneTraffic(laneTraffic);
-        assertTrue(laneTrafficService.getLaneTrafficById(1).toString().equals(laneTraffic.toString()),"Data komt niet overheen");
+        assertTrue(laneTrafficService.getLatestLaneTrafficById(1).toString().equals(laneTraffic.toString()),"Data komt niet overheen");
 
     }
 }

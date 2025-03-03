@@ -1,6 +1,6 @@
-package com.dynamischrijbaansysteem.data;
-import com.dynamischrijbaansysteem.Lane;
-import com.dynamischrijbaansysteem.LaneStatus;
+package com.dynamischrijbaansysteem.services;
+import com.dynamischrijbaansysteem.data.MongoDBConnection;
+import com.dynamischrijbaansysteem.models.Lane;
 import com.mongodb.client.MongoCollection;
 import com.mongodb.client.MongoDatabase;
 import org.bson.Document;
@@ -8,7 +8,6 @@ import static com.mongodb.client.model.Filters.eq;
 
 
 import java.util.ArrayList;
-import java.util.Collection;
 import java.util.List;
 
 public class LaneService {

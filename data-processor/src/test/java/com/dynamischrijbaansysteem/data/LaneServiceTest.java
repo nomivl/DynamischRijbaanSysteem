@@ -1,6 +1,7 @@
 package com.dynamischrijbaansysteem.data;
 
-import com.dynamischrijbaansysteem.Lane;
+import com.dynamischrijbaansysteem.models.Lane;
+import com.dynamischrijbaansysteem.services.LaneService;
 import org.junit.jupiter.api.Test;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
