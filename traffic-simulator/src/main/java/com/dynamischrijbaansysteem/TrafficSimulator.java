@@ -7,6 +7,7 @@ import org.osgi.service.component.annotations.Component;
 import javax.jms.*;
 
 import javax.jms.ConnectionFactory;
+import java.util.Random;
 
 @Component(immediate = true)
 public class TrafficSimulator {
@@ -31,9 +32,11 @@ public class TrafficSimulator {
             MessageProducer producer = session.createProducer(destination);
             producer.setDeliveryMode(DeliveryMode.NON_PERSISTENT);
             ObjectMapper objectMapper = new ObjectMapper();
+            Random rand = new Random();
             // Simuleer verkeersdata
-            for(int i = 1; i<=10; i++) {
-               LaneTraffic traffic = new LaneTraffic(1, i, System.currentTimeMillis());
+            for(int i = 1; i<=20; i++) {
+                // TO DO: implement dynamic lane id's
+                LaneTraffic traffic = new LaneTraffic(rand.nextInt(1,4),rand.nextInt(101), System.currentTimeMillis());
                 String jsonMessage = objectMapper.writeValueAsString(traffic);
                 String message = "Traffic update " + jsonMessage;
                 TextMessage objectMessage = session.createTextMessage(jsonMessage);

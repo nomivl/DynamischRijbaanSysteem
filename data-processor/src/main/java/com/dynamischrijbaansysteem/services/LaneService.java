@@ -28,7 +28,7 @@ public class LaneService {
     public List<Lane> getLanes(){
         List<Lane> lanes = new ArrayList<>();
         for (Document doc: laneCollection.find()){
-            System.out.println(doc.toJson());
+            System.out.println("Get lanes: " + doc.toJson());
 
             int laneId = doc.getInteger("laneId");
             String location = doc.getString("location");
