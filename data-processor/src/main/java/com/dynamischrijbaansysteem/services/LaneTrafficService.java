@@ -44,21 +44,19 @@ public class LaneTrafficService {
         return laneTraffic;
     }
 
-    public List<Map<String, LaneTraffic>> getHistoryFromDB(Integer laneId) {
-        List<Map<String, LaneTraffic>> history = new ArrayList<>();
+    public List<LaneTraffic> getHistoryFromDB(Integer laneId) {
+        List<LaneTraffic> history = new ArrayList<>();
         MongoCursor<Document> cursor = collection.find(new Document("laneId", laneId)).sort(new Document("timestamp",-1)).cursor();
 
         while(cursor.hasNext()) {
             Document document = cursor.next();
-            Map<String, LaneTraffic> traffic = new HashMap<>();
             LaneTraffic laneTraffic = new LaneTraffic(
                     document.getInteger("laneId"),
                     document.getInteger("density"),
                     document.getLong("timestamp"),
                     LaneStatus.fromString(document.getString("lanestatus")),
                     document.getString("comment"));
-            traffic.put(document.getLong("timestamp").toString(),laneTraffic);
-            history.add(traffic);
+            history.add(laneTraffic);
         }
         return history;
     }

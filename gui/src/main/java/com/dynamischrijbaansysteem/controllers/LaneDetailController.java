@@ -1,18 +1,23 @@
 package com.dynamischrijbaansysteem.controllers;
 
+import com.dynamischrijbaansysteem.LaneStatus;
 import com.dynamischrijbaansysteem.models.Lane;
 import com.dynamischrijbaansysteem.interfaces.ServiceInjectable;
 import com.dynamischrijbaansysteem.models.LaneTraffic;
 import com.dynamischrijbaansysteem.view.DensityCell;
+import com.fasterxml.jackson.databind.annotation.JsonAppend;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.*;
 import javafx.scene.control.cell.MapValueFactory;
+import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.layout.GridPane;
 
 import java.net.URL;
+import java.sql.Time;
+import java.sql.Timestamp;
 import java.util.List;
 import java.util.Map;
 import java.util.ResourceBundle;
@@ -23,11 +28,15 @@ public class LaneDetailController implements Initializable, ServiceInjectable<La
     @FXML
     private Label locationLabel;
     @FXML
-    private TableView<Map<String, LaneTraffic>> historyTable;
+    private TableView<LaneTraffic> historyTable;
     @FXML
-    private TableColumn<Map, Object> timestampColumn;
+    private TableColumn<LaneTraffic, Long> timestampColumn;
     @FXML
-    private TableColumn<Map, Object>densityColumn;
+    private TableColumn<LaneTraffic, Integer>densityColumn;
+    @FXML
+    private TableColumn<LaneTraffic, Object>statusColumn;
+    @FXML
+    private TableColumn<LaneTraffic, String> commentColumn;
 
     private Lane lane;
 
@@ -57,16 +66,30 @@ public class LaneDetailController implements Initializable, ServiceInjectable<La
         laneDetailTable.add(modified,1,3);
     }
 
-    // FIX: get data from LaneTraffic
     public void populateHistoryTable(){
-        timestampColumn.setCellValueFactory(new MapValueFactory<>("timestamp"));
+        timestampColumn.setCellValueFactory(new PropertyValueFactory<>("timestamp"));
 
-        densityColumn.setCellValueFactory(new MapValueFactory<>("density"));
+        densityColumn.setCellValueFactory(new PropertyValueFactory<>("density"));
+        statusColumn.setCellValueFactory(new PropertyValueFactory<>("laneStatus"));
+        commentColumn.setCellValueFactory(new PropertyValueFactory<>("comment"));
+
         densityColumn.setCellFactory(column -> new DensityCell());
+        timestampColumn.setCellFactory(column ->
+            new TableCell<LaneTraffic, Long>() {
+                @Override
+                protected void updateItem(Long timestamp, boolean empty) {
+                    if (empty || timestamp == null){
+                        setText(null);
+                    } else {
+                        setText(String.valueOf(new Time(timestamp)));
+                    }
+                }
+            }
+        );
 
-        List<Map<String, LaneTraffic>> history = lane.getHistory();
+        List<LaneTraffic> history = lane.getHistory();
         if (history != null) {
-            ObservableList<Map<String, LaneTraffic>> data = FXCollections.observableArrayList(history);
+            ObservableList<LaneTraffic> data = FXCollections.observableArrayList(history);
             historyTable.setItems(data);
         }
 

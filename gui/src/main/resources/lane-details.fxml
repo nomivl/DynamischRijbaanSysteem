@@ -29,6 +29,8 @@
             <TableView fx:id="historyTable"  prefWidth="300" styleClass="history-table">
                 <columns>
                     <TableColumn fx:id="densityColumn" text="Verkeersdichtheid"/>
+                    <TableColumn fx:id="statusColumn" text="Status"/>
+                    <TableColumn fx:id="commentColumn" text="Toelichting"/>
                     <TableColumn fx:id="timestampColumn" text="Timestamp"/>
                 </columns>
             </TableView>

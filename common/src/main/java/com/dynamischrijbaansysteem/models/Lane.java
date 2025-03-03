@@ -13,7 +13,7 @@ public class Lane {
     private String location;
     private LaneTraffic laneTraffic;
     private Boolean dynamicLaneControl;
-    private List<Map<String,LaneTraffic>> history;
+    private List<LaneTraffic> history;
     public Lane(int laneId, String location) {
         this.laneId = laneId;
         this.location = location;
@@ -53,11 +53,11 @@ public class Lane {
     public void setDynamicLaneControl(Boolean dynamicLaneControl){
         this.dynamicLaneControl = dynamicLaneControl;
     }
-    public void setHistory(List<Map<String, LaneTraffic>> history) {
+    public void setHistory(List<LaneTraffic> history) {
         this.history = history;
     }
 
-    public List<Map<String, LaneTraffic>> getHistory() {
+    public List<LaneTraffic> getHistory() {
         return history;
     }
 

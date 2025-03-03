@@ -1,5 +1,6 @@
 package com.dynamischrijbaansysteem.view;
 
+import com.dynamischrijbaansysteem.models.LaneTraffic;
 import javafx.scene.control.Label;
 import javafx.scene.control.ProgressBar;
 import javafx.scene.control.TableCell;
@@ -7,7 +8,7 @@ import javafx.scene.layout.HBox;
 
 import java.util.Map;
 
-public class DensityCell extends TableCell<Map, Object> {
+public class DensityCell extends TableCell<LaneTraffic, Integer> {
     private final ProgressBar progressBar = new ProgressBar();
     private final Label percentageLabel = new Label();
     private final HBox hbox = new HBox(progressBar, percentageLabel);
@@ -17,13 +18,13 @@ public class DensityCell extends TableCell<Map, Object> {
     }
 
     @Override
-    protected void updateItem(Object item, boolean empty) {
-        super.updateItem(item, empty);
-        if (empty || item == null) {
+    protected void updateItem(Integer percentage, boolean empty) {
+        super.updateItem(percentage, empty);
+        if (empty || percentage == null) {
             setGraphic(null);
             setText(null);
         } else {
-            int density = ((Number) item).intValue();
+            int density = ((Number) percentage).intValue();
             progressBar.setProgress(density / 100.0);
 
             if (density > 80) {
