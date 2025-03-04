@@ -9,12 +9,20 @@
 <?import javafx.scene.shape.Rectangle?>
 <?import javafx.scene.control.TableView?>
 <?import javafx.scene.control.TableColumn?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.shape.SVGPath?>
 <BorderPane xmlns="http://javafx.com/javafx/17"
             xmlns:fx="http://javafx.com/fxml/1"
             fx:controller="com.dynamischrijbaansysteem.controllers.LaneDetailController"
             styleClass="container">
     <top>
-        <Label fx:id="locationLabel" styleClass="h1"/>
+
+        <AnchorPane>
+            <Label fx:id="locationLabel" styleClass="h1"/>
+            <Button fx:id="settingsButton" AnchorPane.rightAnchor="10" styleClass="icon"/>
+
+        </AnchorPane>
+
     </top>
     <center>
         <VBox>

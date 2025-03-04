@@ -4,6 +4,7 @@ import com.dynamischrijbaansysteem.LaneStatus;
 import com.dynamischrijbaansysteem.models.Lane;
 import com.dynamischrijbaansysteem.interfaces.ServiceInjectable;
 import com.dynamischrijbaansysteem.models.LaneTraffic;
+import com.dynamischrijbaansysteem.utils.SVGLoader;
 import com.dynamischrijbaansysteem.view.DensityCell;
 import com.fasterxml.jackson.databind.annotation.JsonAppend;
 import javafx.collections.FXCollections;
@@ -14,6 +15,7 @@ import javafx.scene.control.*;
 import javafx.scene.control.cell.MapValueFactory;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.layout.GridPane;
+import javafx.scene.shape.SVGPath;
 
 import java.net.URL;
 import java.sql.Time;
@@ -37,7 +39,8 @@ public class LaneDetailController implements Initializable, ServiceInjectable<La
     private TableColumn<LaneTraffic, Object>statusColumn;
     @FXML
     private TableColumn<LaneTraffic, String> commentColumn;
-
+    @FXML
+    private Button settingsButton;
     private Lane lane;
 
     @Override
@@ -47,6 +50,7 @@ public class LaneDetailController implements Initializable, ServiceInjectable<La
         locationLabel.setText(lane.getLocation());
         historyTable.setColumnResizePolicy(TableView.CONSTRAINED_RESIZE_POLICY);
         populateHistoryTable();
+        settingsButton.setGraphic(SVGLoader.loadSVG("gui/src/main/resources/images/setting-svgrepo-com.svg"));
     }
 
     @Override

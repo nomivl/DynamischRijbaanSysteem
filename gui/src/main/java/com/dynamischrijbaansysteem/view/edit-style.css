@@ -91,3 +91,12 @@ Button:pressed {
 .update-red {
     -fx-background-color:red;
 }
+
+.icon {
+    -fx-text-fill: white;
+    -fx-scale-x: 1;
+    -fx-scale-y: 1;
+    -fx-background-color: none;
+    -fx-text-fill: black;
+
+}
