@@ -52,8 +52,6 @@ public class LaneOverviewController implements Initializable, ServiceInjectable<
 
     }
     private void populateLaneTable () {
-
-
         List<Lane> lanes = laneManager.getLaneData(false);
         int row = 1;
         for (Lane lane: lanes) {

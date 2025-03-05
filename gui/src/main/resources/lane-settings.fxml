@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.layout.BorderPane?>
+<?import javafx.scene.layout.GridPane?>
+
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.shape.Rectangle?>
+<?import javafx.scene.control.TableView?>
+<?import javafx.scene.control.TableColumn?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.shape.SVGPath?>
+<?import javafx.scene.layout.StackPane?>
+<?import javafx.scene.control.ComboBox?>
+<?import javafx.scene.control.CheckBox?>
+<?import javafx.scene.control.TextField?>
+<StackPane xmlns="http://javafx.com/javafx/17"
+           xmlns:fx="http://javafx.com/fxml/1"
+           fx:controller="com.dynamischrijbaansysteem.controllers.LaneSettingsController"
+           styleClass="top-stack"
+           prefWidth="400" prefHeight="300">
+    <VBox>
+        <GridPane vgap="5">
+            <Label text="dynamic lane control: " GridPane.columnIndex="0" GridPane.rowIndex="0"/>
+            <CheckBox fx:id="dynamicLaneControlCB" GridPane.columnIndex="1" GridPane.rowIndex="0" onAction="#checkDynamicLaneControl"/>
+
+            <Label text="Lane status: " GridPane.columnIndex="0" GridPane.rowIndex="1"/>
+            <ComboBox fx:id="laneStatusCB" GridPane.columnIndex="1" GridPane.rowIndex="1"/>
+
+            <Label text="Toelichting" GridPane.columnIndex="0" GridPane.rowIndex="2"/>
+            <TextField fx:id="commentTF" GridPane.columnIndex="1" GridPane.rowIndex="2"/>
+        </GridPane>
+        <Button fx:id="saveButton" text="Opslaan" onAction="#saveSettings"/>
+
+    </VBox>
+
+</StackPane>

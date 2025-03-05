@@ -24,6 +24,7 @@ public class LaneTrafficService {
                 .append("laneId", laneTraffic.getLaneId())
                 .append("density", laneTraffic.getDensity())
                 .append("lanestatus", laneTraffic.getLaneStatus())
+                .append("comment", laneTraffic.getComment())
                 .append("timestamp", laneTraffic.getTimestamp()));
         System.out.println("Insert lane traffic into DB: "+ laneTraffic.toString());
     }

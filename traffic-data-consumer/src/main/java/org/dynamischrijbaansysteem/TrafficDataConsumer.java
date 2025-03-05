@@ -44,6 +44,7 @@ public class TrafficDataConsumer {
                     String json = ((TextMessage) message).getText();
                     LaneTraffic laneTraffic = objectMapper.readValue(json, LaneTraffic.class);
                     laneTraffic.setLaneStatus(laneStatusService.determineExtraLaneStatus(laneTraffic.getDensity()));
+                    laneTraffic.setComment("System");
                     laneTrafficService.insertLaneTraffic(laneTraffic);
                     System.out.println(json);
                 } else {

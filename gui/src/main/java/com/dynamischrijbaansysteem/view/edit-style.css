@@ -100,3 +100,7 @@ Button:pressed {
     -fx-text-fill: black;
 
 }
+
+.top-stack{
+    -fx-background-color: white;
+}

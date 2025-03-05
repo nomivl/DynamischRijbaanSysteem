@@ -11,37 +11,41 @@
 <?import javafx.scene.control.TableColumn?>
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.shape.SVGPath?>
+<?import javafx.scene.layout.StackPane?>
 <BorderPane xmlns="http://javafx.com/javafx/17"
             xmlns:fx="http://javafx.com/fxml/1"
             fx:controller="com.dynamischrijbaansysteem.controllers.LaneDetailController"
-            styleClass="container">
+            styleClass="container"
+            fx:id="content">
     <top>
 
         <AnchorPane>
             <Label fx:id="locationLabel" styleClass="h1"/>
-            <Button fx:id="settingsButton" AnchorPane.rightAnchor="10" styleClass="icon"/>
+            <Button fx:id="settingsButton" AnchorPane.rightAnchor="10" styleClass="icon" onAction="#toggleSettings"/>
 
         </AnchorPane>
 
     </top>
     <center>
-        <VBox>
-            <GridPane fx:id="laneDetailTable" hgap="15" vgap="5" styleClass="lane-detail-table">
-                <Label text="ID:" styleClass="table-heading" GridPane.columnIndex="0" GridPane.rowIndex="0"/>
-                <Label text="Status:" styleClass="table-heading" GridPane.columnIndex="0" GridPane.rowIndex="1"/>
-                <Label text="Verkeersdichtheid:" styleClass="table-heading" GridPane.columnIndex="0" GridPane.rowIndex="2"/>
-                <Label text="Laatst bijgewerkt:" styleClass="table-heading" GridPane.columnIndex="0" GridPane.rowIndex="3"/>
-            </GridPane>
+        <StackPane fx:id="stackContent">
+            <VBox>
+                <GridPane fx:id="laneDetailTable" hgap="15" vgap="5" styleClass="lane-detail-table">
+                    <Label text="ID:" styleClass="table-heading" GridPane.columnIndex="0" GridPane.rowIndex="0"/>
+                    <Label text="Status:" styleClass="table-heading" GridPane.columnIndex="0" GridPane.rowIndex="1"/>
+                    <Label text="Verkeersdichtheid:" styleClass="table-heading" GridPane.columnIndex="0" GridPane.rowIndex="2"/>
+                    <Label text="Laatst bijgewerkt:" styleClass="table-heading" GridPane.columnIndex="0" GridPane.rowIndex="3"/>
+                </GridPane>
 
 
-            <TableView fx:id="historyTable"  prefWidth="300" styleClass="history-table">
-                <columns>
-                    <TableColumn fx:id="densityColumn" text="Verkeersdichtheid"/>
-                    <TableColumn fx:id="statusColumn" text="Status"/>
-                    <TableColumn fx:id="commentColumn" text="Toelichting"/>
-                    <TableColumn fx:id="timestampColumn" text="Timestamp"/>
-                </columns>
-            </TableView>
-        </VBox>
+                <TableView fx:id="historyTable"  prefWidth="300" styleClass="history-table">
+                    <columns>
+                        <TableColumn fx:id="densityColumn" text="Verkeersdichtheid"/>
+                        <TableColumn fx:id="statusColumn" text="Status"/>
+                        <TableColumn fx:id="commentColumn" text="Toelichting"/>
+                        <TableColumn fx:id="timestampColumn" text="Timestamp"/>
+                    </columns>
+                </TableView>
+            </VBox>
+        </StackPane>
     </center>
 </BorderPane>
