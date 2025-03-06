@@ -22,10 +22,7 @@ import javafx.scene.control.Label;
 import javafx.util.Duration;
 
 import java.net.URL;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
-import java.util.ResourceBundle;
+import java.util.*;
 
 public class LaneOverviewController implements Initializable, ServiceInjectable<LaneManager> {
     private BorderPane laneOverviewLayout;
@@ -71,7 +68,7 @@ public class LaneOverviewController implements Initializable, ServiceInjectable<
                 Label densityLabel = new Label(lane.getLaneTraffic().getDensity().toString());
                 densityLabels.put(id, densityLabel);
 
-                Label timestampLabel = new Label(lane.getLaneTraffic().getTimestamp().toString());
+                Label timestampLabel = new Label(new Date(lane.getLaneTraffic().getTimestamp()).toString());
                 timestampsLabels.put(id, timestampLabel);
 
                 Button detailButton = new Button("Details");

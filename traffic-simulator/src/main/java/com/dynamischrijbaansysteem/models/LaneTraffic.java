@@ -2,6 +2,7 @@ package com.dynamischrijbaansysteem.models;
 
 import java.io.Serializable;
 import java.sql.Time;
+import java.util.Date;
 
 public class LaneTraffic implements Serializable {
     private static final long serialVersionUID = 1L;
@@ -41,6 +42,6 @@ public class LaneTraffic implements Serializable {
 
     @Override
     public String toString(){
-        return "Lane " + this.laneId + " has a " + this.density + "% " + "density " +  "at " + new Time(this.timestamp);
+        return "Lane " + this.laneId + " has a " + this.density + "% " + "density " +  "at " + new Time(this.timestamp) + new Date(this.timestamp);
     }
 }

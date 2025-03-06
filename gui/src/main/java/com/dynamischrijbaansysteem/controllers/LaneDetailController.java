@@ -26,6 +26,7 @@ import javafx.stage.Stage;
 import java.net.URL;
 import java.sql.Time;
 import java.sql.Timestamp;
+import java.util.Date;
 import java.util.List;
 import java.util.Map;
 import java.util.ResourceBundle;
@@ -118,7 +119,7 @@ public class LaneDetailController implements Initializable, ServiceInjectable<La
                     if (empty || timestamp == null){
                         setText(null);
                     } else {
-                        setText(String.valueOf(new Time(timestamp)));
+                        setText(String.valueOf(new Date(timestamp)));
                     }
                 }
             }
