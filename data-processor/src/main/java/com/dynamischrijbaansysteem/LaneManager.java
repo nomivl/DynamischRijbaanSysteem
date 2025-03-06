@@ -35,4 +35,12 @@ public class LaneManager {
         return lane;
     }
 
+    // kan dit beter?
+    public LaneTrafficService getLaneTrafficService(){
+        return this.laneTrafficService;
+    }
+
+    public LaneService getLaneService() {
+        return laneService;
+    }
 }

@@ -16,6 +16,7 @@ public class NavigationService {
     public <T> void goToLaneDetails(Integer id, T context) {
         loadContent("/lane-details.fxml", context);
     }
+    public <T> void goToDashboard(T context) { loadContent("/dashboard.fxml", context);}
 
     private NavigationService(){
 

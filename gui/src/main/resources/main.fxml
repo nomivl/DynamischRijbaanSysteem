@@ -18,7 +18,7 @@
                     <Label styleClass="logo" text="DRS"/>
                     <Label styleClass="tagline" text="systeem"/>
             </VBox>
-            <Button text="Dashboard" onAction="#goToLanes"/>
+            <Button text="Dashboard" onAction="#goToDashboard"/>
             <Button text="Lanes" onAction="#goToLanes"/>
         </VBox>
     </left>

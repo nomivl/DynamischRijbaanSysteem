@@ -62,6 +62,19 @@ public class LaneTrafficService {
         return history;
     }
 
+    public List<Map<String,Object>> getAllDataPointsFromDB() {
+        List<Map<String,Object>> dataPoints = new ArrayList<>();
+        MongoCursor<Document> cursor = collection.find().sort(new Document("timestamp",-1)).cursor();
+
+        while(cursor.hasNext()) {
+            Document document = cursor.next();
+            Long timestamp = document.getLong("timestamp");
+            Integer density =  document.getInteger("density");
+            dataPoints.add(Map.of("timestamp", timestamp,"density",density));
+        }
+        return dataPoints;
+    }
+
 
 
 }

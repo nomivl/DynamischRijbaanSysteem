@@ -19,6 +19,9 @@ public class MainController implements Initializable, ServiceInjectable<LaneMana
     @FXML public void goToLanes(){
         NavigationService.getInstance().goToLanes(this.laneManager);
     }
+    @FXML public void goToDashboard(){
+        NavigationService.getInstance().goToDashboard(this.laneManager);
+    }
 
     @Override
     public void setContext(LaneManager laneManager) {
