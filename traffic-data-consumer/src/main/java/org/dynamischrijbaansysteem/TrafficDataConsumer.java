@@ -1,6 +1,7 @@
 package org.dynamischrijbaansysteem;
 import javax.jms.*;
 
+import com.dynamischrijbaansysteem.services.LaneService;
 import com.dynamischrijbaansysteem.services.LaneStatusService;
 import com.dynamischrijbaansysteem.services.LaneTrafficService;
 import com.dynamischrijbaansysteem.utils.ConfigLoader;
@@ -13,9 +14,12 @@ public class TrafficDataConsumer {
     private static final String BROKER_URL = "tcp://localhost:61616";
     private static final String QUEUE_NAME = "traffic.data";
     private static final ConfigLoader config = new ConfigLoader();
+
+    // TO DO: services injecten.
     private static final LaneTrafficService  laneTrafficService = new LaneTrafficService();
     private static final LaneStatusService laneStatusService = new LaneStatusService();
 
+    private static final LaneService laneService = new LaneService();
 
     public static void start() throws Exception {
         ConnectionFactory factory = new ActiveMQConnectionFactory(config.getProperty("activemq.url", BROKER_URL));
@@ -44,8 +48,11 @@ public class TrafficDataConsumer {
                     String json = ((TextMessage) message).getText();
                     LaneTraffic laneTraffic = objectMapper.readValue(json, LaneTraffic.class);
                     laneTraffic.setLaneStatus(laneStatusService.determineExtraLaneStatus(laneTraffic.getDensity()));
+                    boolean dynamicLaneControl = laneService.getLaneById(laneTraffic.getLaneId()).getDynamicLaneControl();
                     laneTraffic.setComment("System");
-                    laneTrafficService.insertLaneTraffic(laneTraffic);
+                    if (dynamicLaneControl) {
+                        laneTrafficService.insertLaneTraffic(laneTraffic);
+                    }
                     System.out.println(json);
                 } else {
                     System.err.println("Onbekend bericht type ontvangen: "+ message.getClass().getSimpleName());

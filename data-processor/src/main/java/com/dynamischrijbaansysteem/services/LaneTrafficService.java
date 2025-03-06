@@ -31,7 +31,7 @@ public class LaneTrafficService {
 
     public LaneTraffic getLatestLaneTrafficById(Integer laneId) {
         Document document = collection.find(new Document("laneId", laneId))
-                .sort(new Document("timestamp", -1))
+                .sort(new Document("_id", -1))
                 .first();
         if (document == null) {
             return null;
@@ -47,7 +47,7 @@ public class LaneTrafficService {
 
     public List<LaneTraffic> getHistoryFromDB(Integer laneId) {
         List<LaneTraffic> history = new ArrayList<>();
-        MongoCursor<Document> cursor = collection.find(new Document("laneId", laneId)).sort(new Document("timestamp",-1)).cursor();
+        MongoCursor<Document> cursor = collection.find(new Document("laneId", laneId)).sort(new Document("_id",-1)).cursor();
 
         while(cursor.hasNext()) {
             Document document = cursor.next();
@@ -64,7 +64,7 @@ public class LaneTrafficService {
 
     public List<Map<String,Object>> getAllDataPointsFromDB() {
         List<Map<String,Object>> dataPoints = new ArrayList<>();
-        MongoCursor<Document> cursor = collection.find().sort(new Document("timestamp",-1)).cursor();
+        MongoCursor<Document> cursor = collection.find().sort(new Document("_id",-1)).cursor();
 
         while(cursor.hasNext()) {
             Document document = cursor.next();
