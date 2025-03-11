@@ -8,18 +8,23 @@ import com.dynamischrijbaansysteem.services.NavigationService;
 import com.dynamischrijbaansysteem.utils.SVGLoader;
 import com.dynamischrijbaansysteem.view.DensityCell;
 import com.fasterxml.jackson.databind.annotation.JsonAppend;
+import com.mongodb.client.model.Windows;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
+import javafx.geometry.Bounds;
 import javafx.geometry.Pos;
+import javafx.scene.Group;
 import javafx.scene.Scene;
 import javafx.scene.control.*;
 import javafx.scene.control.cell.MapValueFactory;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.layout.*;
+import javafx.scene.shape.Rectangle;
 import javafx.scene.shape.SVGPath;
+import javafx.scene.transform.Scale;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
 
@@ -34,6 +39,11 @@ import java.util.ResourceBundle;
 public class LaneDetailController implements Initializable, ServiceInjectable<Lane> {
     @FXML
     private StackPane stackContent;
+    @FXML
+    Group laneImage;
+    @FXML
+    private Pane laneImageContainer;
+
     @FXML
     private GridPane laneDetailTable;
     @FXML
@@ -61,6 +71,26 @@ public class LaneDetailController implements Initializable, ServiceInjectable<La
         locationLabel.setText(lane.getLocation());
         historyTable.setColumnResizePolicy(TableView.CONSTRAINED_RESIZE_POLICY);
         populateHistoryTable();
+        loadLaneIllustration();
+
+    }
+
+    private void loadLaneIllustration(){
+        try {
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("/lane-illustration.fxml"));
+            Group image = loader.load();
+
+            laneImage.getChildren().setAll(image.getChildren());
+            laneImage.getTransforms().add(new Scale(0.6,0.6));
+            Bounds bounds = laneImage.getBoundsInLocal();
+            Rectangle clip = new Rectangle(bounds.getWidth(),bounds.getHeight());
+            laneImage.setClip(clip);
+            laneImageContainer.setPrefSize(bounds.getWidth(),bounds.getHeight());
+
+
+        } catch (Exception e){
+            e.printStackTrace();
+        }
 
     }
 

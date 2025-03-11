@@ -104,3 +104,36 @@ Button:pressed {
 .top-stack{
     -fx-background-color: white;
 }
+
+.lane-image {
+    -fx-border-color: red;
+    -fx-background-color: red;
+
+}
+
+
+/*
+.lane-image-container{
+    -fx-border-color: blue;
+
+}
+
+.container StackPane {
+    -fx-border-color: red;
+}
+
+.container HBox {
+    -fx-border-color: green;
+}
+.container VBox {
+    -fx-border-color: yellow;
+}
+
+.container GridPane {
+    -fx-border-color: purple;
+}
+
+.container AnchorPane{
+    -fx-border-color: black;
+}
+*/
