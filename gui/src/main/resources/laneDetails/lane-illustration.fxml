@@ -8,7 +8,7 @@
 <?import javafx.scene.transform.*?>
 <?import javafx.scene.effect.*?>
 
-<Group id='_root' xmlns:fx="http://javafx.com/fxml" xmlns:fxsvg="http://efxclipse.org/fxml-svg">
+<Group id='_root' xmlns:fx="http://javafx.com/fxml" xmlns:fxsvg="http://efxclipse.org/fxml-svg" fx:controller="com.dynamischrijbaansysteem.controllers.laneDetails.LaneGraphController">
 	<children>
 		<Group
 			opacity="1.0"
@@ -886,10 +886,10 @@
 					</fill>
 				</SVGPath>
 				<Rectangle fx:id="ICON_PLACEHOLDER_1"
-					x="183.0"
-					y="34.0"
-					width="61.0"
-					height="61.0"
+					x="189.0"
+					y="39.0"
+					width="51.0"
+					height="51.0"
 					opacity="1"
 					id="ICON_PLACEHOLDER_1"
 					>
@@ -903,10 +903,10 @@
 				
 				</Rectangle>
 				<Rectangle fx:id="ICON_PLACEHOLDER_2"
-					x="262.0"
-					y="34.0"
-					width="61.0"
-					height="61.0"
+					x="269.0"
+					y="39.0"
+					width="51.0"
+					height="51.0"
 					opacity="1"
 					id="ICON_PLACEHOLDER_2"
 					>
@@ -920,10 +920,10 @@
 				
 				</Rectangle>
 				<Rectangle fx:id="ICON_PLACEHOLDER_3"
-					x="340.0"
-					y="34.0"
-					width="61.0"
-					height="61.0"
+					x="347.0"
+					y="39.0"
+					width="51.0"
+					height="51.0"
 					opacity="1"
 					id="ICON_PLACEHOLDER_3"
 					>

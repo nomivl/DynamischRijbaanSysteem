@@ -1,39 +1,26 @@
-package com.dynamischrijbaansysteem.controllers;
+package com.dynamischrijbaansysteem.controllers.laneDetails;
 
-import com.dynamischrijbaansysteem.LaneStatus;
 import com.dynamischrijbaansysteem.models.Lane;
 import com.dynamischrijbaansysteem.interfaces.ServiceInjectable;
 import com.dynamischrijbaansysteem.models.LaneTraffic;
-import com.dynamischrijbaansysteem.services.NavigationService;
 import com.dynamischrijbaansysteem.utils.SVGLoader;
 import com.dynamischrijbaansysteem.view.DensityCell;
-import com.fasterxml.jackson.databind.annotation.JsonAppend;
-import com.mongodb.client.model.Windows;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
 import javafx.geometry.Bounds;
-import javafx.geometry.Pos;
 import javafx.scene.Group;
-import javafx.scene.Scene;
 import javafx.scene.control.*;
-import javafx.scene.control.cell.MapValueFactory;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.layout.*;
 import javafx.scene.shape.Rectangle;
-import javafx.scene.shape.SVGPath;
 import javafx.scene.transform.Scale;
-import javafx.stage.Modality;
-import javafx.stage.Stage;
 
 import java.net.URL;
-import java.sql.Time;
-import java.sql.Timestamp;
 import java.util.Date;
 import java.util.List;
-import java.util.Map;
 import java.util.ResourceBundle;
 
 public class LaneDetailController implements Initializable, ServiceInjectable<Lane> {
@@ -77,10 +64,12 @@ public class LaneDetailController implements Initializable, ServiceInjectable<La
 
     private void loadLaneIllustration(){
         try {
-            FXMLLoader loader = new FXMLLoader(getClass().getResource("/lane-illustration.fxml"));
-            Group image = loader.load();
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("/laneDetails/lane-illustration.fxml"));
+            Group laneGraphic = loader.load();
+            LaneGraphController controller = loader.getController();
+            controller.setContext(this.lane);
 
-            laneImage.getChildren().setAll(image.getChildren());
+            laneImage.getChildren().setAll(laneGraphic.getChildren());
             laneImage.getTransforms().add(new Scale(0.6,0.6));
             Bounds bounds = laneImage.getBoundsInLocal();
             Rectangle clip = new Rectangle(bounds.getWidth(),bounds.getHeight());
@@ -110,7 +99,7 @@ public class LaneDetailController implements Initializable, ServiceInjectable<La
     public void showSettings() {
         System.out.println("show settings");
         try {
-            FXMLLoader loader = new FXMLLoader(getClass().getResource("/lane-settings.fxml"));
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("/laneDetails/lane-settings.fxml"));
             laneSettings = loader.load();
             LaneSettingsController controller = loader.getController();
             controller.setContext(this.lane);

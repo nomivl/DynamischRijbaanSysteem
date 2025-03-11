@@ -1,7 +1,5 @@
 package com.dynamischrijbaansysteem.services;
 
-import com.dynamischrijbaansysteem.LaneManager;
-import com.dynamischrijbaansysteem.models.Lane;
 import com.dynamischrijbaansysteem.MainApp;
 import com.dynamischrijbaansysteem.interfaces.ServiceInjectable;
 import javafx.fxml.FXMLLoader;
@@ -14,7 +12,7 @@ public class NavigationService {
         loadContent("/lane-overview.fxml", context);
     }
     public <T> void goToLaneDetails(Integer id, T context) {
-        loadContent("/lane-details.fxml", context);
+        loadContent("/laneDetails/lane-details.fxml", context);
     }
     public <T> void goToDashboard(T context) { loadContent("/dashboard.fxml", context);}
 

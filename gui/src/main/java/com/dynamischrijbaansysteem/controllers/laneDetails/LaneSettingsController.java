@@ -1,4 +1,4 @@
-package com.dynamischrijbaansysteem.controllers;
+package com.dynamischrijbaansysteem.controllers.laneDetails;
 
 import com.dynamischrijbaansysteem.LaneStatus;
 import com.dynamischrijbaansysteem.interfaces.ServiceInjectable;

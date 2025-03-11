@@ -17,7 +17,7 @@
 <?import javafx.scene.control.TextField?>
 <StackPane xmlns="http://javafx.com/javafx/17"
            xmlns:fx="http://javafx.com/fxml/1"
-           fx:controller="com.dynamischrijbaansysteem.controllers.LaneSettingsController"
+           fx:controller="com.dynamischrijbaansysteem.controllers.laneDetails.LaneSettingsController"
            styleClass="top-stack"
            prefWidth="400" prefHeight="300">
     <VBox>

@@ -15,7 +15,7 @@
 <?import javafx.scene.layout.Pane?>
 <BorderPane xmlns="http://javafx.com/javafx/17"
             xmlns:fx="http://javafx.com/fxml/1"
-            fx:controller="com.dynamischrijbaansysteem.controllers.LaneDetailController"
+            fx:controller="com.dynamischrijbaansysteem.controllers.laneDetails.LaneDetailController"
             styleClass="container"
             fx:id="content">
     <top>
