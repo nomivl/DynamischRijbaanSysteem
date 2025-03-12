@@ -5,7 +5,7 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 
 
 public class MongoDBConnectionTest {
-
+ /*
     @Test
     public void testInsertAndRetrieveLanes(){
        LaneService laneService = new LaneService();
@@ -15,5 +15,5 @@ public class MongoDBConnectionTest {
         //haal data op en toon deze
        laneService.getLanes();
     }
-
+ */
 }

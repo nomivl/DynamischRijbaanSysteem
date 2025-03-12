@@ -1,6 +1,7 @@
 package com.dynamischrijbaansysteem.models;
 
 import com.dynamischrijbaansysteem.models.LaneTraffic;
+import javafx.beans.property.*;
 
 import java.sql.Time;
 import java.sql.Timestamp;
@@ -11,24 +12,24 @@ import java.util.Objects;
 public class Lane {
     private int laneId;
     private String location;
-    private LaneTraffic laneTraffic;
-    private Boolean dynamicLaneControl;
+    private ObjectProperty<LaneTraffic> laneTraffic = new SimpleObjectProperty<>();
+    private BooleanProperty dynamicLaneControl = new SimpleBooleanProperty();
     private List<LaneTraffic> history;
     public Lane(int laneId, String location) {
         this.laneId = laneId;
         this.location = location;
-        this.dynamicLaneControl = true;
+        this.dynamicLaneControl.set(true);
     }
     public Lane(int laneId, String location, Boolean dynamicLaneControl) {
         this.laneId = laneId;
         this.location = location;
-        this.dynamicLaneControl = dynamicLaneControl;
+        this.dynamicLaneControl.set(dynamicLaneControl);
     }
 
     public Lane(int laneId, String location, LaneTraffic laneTraffic) {
         this.laneId = laneId;
         this.location = location;
-        this.laneTraffic = laneTraffic;
+        this.laneTraffic.set(laneTraffic);
     }
 
     public Integer getLaneId() {
@@ -44,14 +45,14 @@ public class Lane {
     }
 
     public void setLocation(String location) {
-        this.location = location;
+        this.location = location;;
     }
 
     public Boolean getDynamicLaneControl(){
-        return dynamicLaneControl;
+        return dynamicLaneControl.get();
     }
     public void setDynamicLaneControl(Boolean dynamicLaneControl){
-        this.dynamicLaneControl = dynamicLaneControl;
+        this.dynamicLaneControl.set(dynamicLaneControl);
     }
     public void setHistory(List<LaneTraffic> history) {
         this.history = history;
@@ -62,20 +63,28 @@ public class Lane {
     }
 
     public LaneTraffic getLaneTraffic() {
-        return laneTraffic;
+        return laneTraffic.get();
     }
 
     public void setLaneTraffic(LaneTraffic laneTraffic) {
-        this.laneTraffic = laneTraffic;
+        this.laneTraffic.set(laneTraffic);
     }
 
+
+    public BooleanProperty dynamicLaneControlProperty(){
+        return dynamicLaneControl;
+    }
+
+    public ObjectProperty laneTrafficProperty(){
+        return laneTraffic;
+    }
     @Override
     public String toString() {
         return "Lane{" +
                 "laneId=" + laneId +
                 ", location='" + location + '\'' +
-                ", density=" + laneTraffic.getDensity() +
-                ", laneStatus=" + laneTraffic.getLaneStatus() +
+                ", density=" + laneTraffic.get().getDensity() +
+                ", laneStatus=" + laneTraffic.get().getLaneStatus() +
                 '}';
     }
 }

@@ -1,10 +1,12 @@
 package com.dynamischrijbaansysteem.controllers.laneDetails;
 
+import com.dynamischrijbaansysteem.LaneStatus;
 import com.dynamischrijbaansysteem.models.Lane;
 import com.dynamischrijbaansysteem.interfaces.ServiceInjectable;
 import com.dynamischrijbaansysteem.models.LaneTraffic;
 import com.dynamischrijbaansysteem.utils.SVGLoader;
 import com.dynamischrijbaansysteem.view.DensityCell;
+import javafx.beans.binding.Bindings;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
@@ -21,6 +23,7 @@ import javafx.scene.transform.Scale;
 import java.net.URL;
 import java.util.Date;
 import java.util.List;
+import java.util.Objects;
 import java.util.ResourceBundle;
 
 public class LaneDetailController implements Initializable, ServiceInjectable<Lane> {
@@ -59,7 +62,6 @@ public class LaneDetailController implements Initializable, ServiceInjectable<La
         historyTable.setColumnResizePolicy(TableView.CONSTRAINED_RESIZE_POLICY);
         populateHistoryTable();
         loadLaneIllustration();
-
     }
 
     private void loadLaneIllustration(){
@@ -70,7 +72,7 @@ public class LaneDetailController implements Initializable, ServiceInjectable<La
             controller.setContext(this.lane);
 
             laneImage.getChildren().setAll(laneGraphic.getChildren());
-            laneImage.getTransforms().add(new Scale(0.6,0.6));
+
             Bounds bounds = laneImage.getBoundsInLocal();
             Rectangle clip = new Rectangle(bounds.getWidth(),bounds.getHeight());
             laneImage.setClip(clip);
@@ -86,6 +88,8 @@ public class LaneDetailController implements Initializable, ServiceInjectable<La
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
         settingsButton.setGraphic(SVGLoader.loadSVG("gui/src/main/resources/images/setting-svgrepo-com.svg"));
+        // Tijdelijke oplossing
+        laneImage.getTransforms().add(new Scale(0.6,0.6));
     }
 
     @FXML public void toggleSettings() {
@@ -94,6 +98,7 @@ public class LaneDetailController implements Initializable, ServiceInjectable<La
             showSettings();
         } else{
             stackContent.getChildren().remove(laneSettings);
+            setContext(lane);
         }
     }
     public void showSettings() {
@@ -102,6 +107,8 @@ public class LaneDetailController implements Initializable, ServiceInjectable<La
             FXMLLoader loader = new FXMLLoader(getClass().getResource("/laneDetails/lane-settings.fxml"));
             laneSettings = loader.load();
             LaneSettingsController controller = loader.getController();
+
+            // Tijdelijke oplossing
             controller.setContext(this.lane);
 
         } catch (Exception e) {
@@ -113,14 +120,20 @@ public class LaneDetailController implements Initializable, ServiceInjectable<La
     }
     public void populateLaneDetailTable() {
         Label idLabel = new Label(lane.getLaneId().toString());
+
         Label statusLabel = new Label(lane.getLaneTraffic().getLaneStatus().toString());
+        statusLabel.textProperty().bind(Bindings.createStringBinding(() -> lane.getLaneTraffic().getLaneStatus().toString(),lane.laneTrafficProperty()));
+
         Label densityLabel = new Label(lane.getLaneTraffic().getDensity().toString());
-        Label modified = new Label(lane.getLaneTraffic().getTimestamp().toString());
+        densityLabel.textProperty().bind(Bindings.selectString(lane.laneTrafficProperty(), "density"));
+
+        Label timestampLabel = new Label(lane.getLaneTraffic().getTimestamp().toString());
+        timestampLabel.textProperty().bind(Bindings.createStringBinding(() -> new Date (lane.getLaneTraffic().getTimestamp()).toString(), lane.laneTrafficProperty()));
 
         laneDetailTable.add(idLabel,1,0);
         laneDetailTable.add(statusLabel,1,1);
         laneDetailTable.add(densityLabel,1,2);
-        laneDetailTable.add(modified,1,3);
+        laneDetailTable.add(timestampLabel,1,3);
     }
 
     public void populateHistoryTable(){

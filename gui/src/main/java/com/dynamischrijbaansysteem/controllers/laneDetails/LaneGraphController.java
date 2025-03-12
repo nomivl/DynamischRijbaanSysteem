@@ -11,6 +11,7 @@ import javafx.scene.shape.Rectangle;
 
 import java.net.URL;
 import java.util.Arrays;
+import java.util.Objects;
 import java.util.ResourceBundle;
 
 public class LaneGraphController implements Initializable, ServiceInjectable<Lane> {
@@ -34,6 +35,13 @@ public class LaneGraphController implements Initializable, ServiceInjectable<Lan
     @Override
     public void setContext(Lane context) {
         this.lane = context;
+        lane.laneTrafficProperty().addListener((observable) -> {
+            showIcons();
+        });
+        showIcons();
+    }
+
+    public void showIcons() {
         Image[] laneIcons = {openIcon,openIcon,openIcon};
         if (lane.getLaneTraffic().getLaneStatus() == LaneStatus.CLOSE_EXTRA_LANE) {
             laneIcons[2] = closedIcon;
@@ -45,6 +53,5 @@ public class LaneGraphController implements Initializable, ServiceInjectable<Lan
         this.ICON_PLACEHOLDER_1.setFill(new ImagePattern(laneIcons[0]));
         this.ICON_PLACEHOLDER_2.setFill(new ImagePattern(laneIcons[1]));
         this.ICON_PLACEHOLDER_3.setFill(new ImagePattern(laneIcons[2]));
-
     }
 }

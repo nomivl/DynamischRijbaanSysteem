@@ -13,6 +13,9 @@ import javafx.animation.KeyFrame;
 import javafx.animation.SequentialTransition;
 import javafx.animation.Timeline;
 import javafx.application.Platform;
+import javafx.beans.binding.Bindings;
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Button;
@@ -21,20 +24,17 @@ import javafx.scene.layout.GridPane;
 import javafx.scene.control.Label;
 import javafx.util.Duration;
 
+import javax.naming.Binding;
 import java.net.URL;
 import java.util.*;
+import java.util.stream.Collectors;
 
 public class LaneOverviewController implements Initializable, ServiceInjectable<LaneManager> {
     private BorderPane laneOverviewLayout;
     private LaneManager laneManager;
-    private MainApp mainApp;
-    @FXML private GridPane laneTable;
+    private final ObservableList<Lane> lanes = FXCollections.observableArrayList();
 
-    private Map<Integer, Label> idLabels = new HashMap<>();
-    private Map<Integer, Label> locationLabels = new HashMap<>();
-    private Map<Integer, Label> statusLabels = new HashMap<>();
-    private Map<Integer, Label> densityLabels = new HashMap<>();
-    private Map<Integer, Label> timestampsLabels = new HashMap<>();
+    @FXML private GridPane laneTable;
 
 
     @Override
@@ -44,12 +44,8 @@ public class LaneOverviewController implements Initializable, ServiceInjectable<
         startLiveUpdates();
     }
 
-    public void setMainApp(MainApp mainApp) {
-        this.mainApp = mainApp;
-
-    }
     private void populateLaneTable () {
-        List<Lane> lanes = laneManager.getLaneData(false);
+        this.lanes.setAll(laneManager.getLaneData(false));
         int row = 1;
         for (Lane lane: lanes) {
             if (lane.getLaneTraffic() != null) {
@@ -57,19 +53,23 @@ public class LaneOverviewController implements Initializable, ServiceInjectable<
 
                 Label idLabel = new Label(lane.getLaneId().toString());
                 idLabel.getStyleClass().add("table-id");
-                idLabels.put(id, idLabel);
 
                 Label locationLabel = new Label(lane.getLocation());
-                locationLabels.put(id, locationLabel);
 
                 Label statusLabel = new Label(lane.getLaneTraffic().getLaneStatus().toString());
-                statusLabels.put(id,statusLabel);
+                statusLabel.textProperty().bind(Bindings.createStringBinding(() -> lane.getLaneTraffic().getLaneStatus().toString(),lane.laneTrafficProperty()));
+                statusLabel.textProperty().addListener((observable, oldStatus, newStatus) -> {
+                    if (!Objects.equals(oldStatus, newStatus)){
+                        String Colour = newStatus.equals(LaneStatus.OPEN_EXTRA_LANE.toString()) ? "green": "red";
+                        highlightUpdate(statusLabel, Colour);
+                    }
+                });
 
-                Label densityLabel = new Label(lane.getLaneTraffic().getDensity().toString());
-                densityLabels.put(id, densityLabel);
+                Label densityLabel = new Label();
+                densityLabel.textProperty().bind(Bindings.selectString(lane.laneTrafficProperty(), "density"));
 
                 Label timestampLabel = new Label(new Date(lane.getLaneTraffic().getTimestamp()).toString());
-                timestampsLabels.put(id, timestampLabel);
+                timestampLabel.textProperty().bind(Bindings.createStringBinding(() -> new Date (lane.getLaneTraffic().getTimestamp()).toString(), lane.laneTrafficProperty()));
 
                 Button detailButton = new Button("Details");
                 detailButton.getStyleClass().add("primary");
@@ -96,27 +96,24 @@ public class LaneOverviewController implements Initializable, ServiceInjectable<
     }
 
     private void updateLaneData() {
-        List<Lane> lanes = laneManager.getLaneData(false);
-        Platform.runLater(() -> {
-            for (Lane lane: lanes){
-                int laneId = lane.getLaneId();
 
-                if(statusLabels.containsKey(laneId)){
+        //Map<String, Lane> updatedLanesMap = updatedLanes.stream().collect(Collectors.toMap(Lane::getLaneId, Function.identity()));
 
-                    Label statusLabel = statusLabels.get(laneId);
-                    String currentStatus = lane.getLaneTraffic().getLaneStatus().toString();
+        Map<Integer, Lane> updatedLanes = laneManager.getLaneData(false).stream().collect(Collectors.toMap(
+                lane -> lane.getLaneId(),
+                lane -> lane
+        ));
 
-                    if (!statusLabel.getText().equals(currentStatus)){
-                        statusLabel.setText(lane.getLaneTraffic().getLaneStatus().toString());
-                        String Colour = currentStatus.equals(LaneStatus.OPEN_EXTRA_LANE.toString()) ? "green": "red";
-                        highlightUpdate(statusLabel, Colour);
-                    }
+        this.lanes.forEach(lane -> {
+            Lane updatedLane = updatedLanes.get(lane.getLaneId());
+            if (updatedLane != null) {
+                lane.setLaneTraffic(updatedLane.getLaneTraffic());
+                lane.setDynamicLaneControl(updatedLane.getDynamicLaneControl());
+                if (updatedLane.getLaneTraffic().getLaneStatus() != lane.getLaneTraffic().getLaneStatus()){
 
-                    densityLabels.get(laneId).setText(lane.getLaneTraffic().getDensity().toString());
                 }
             }
         });
-
     }
 
     public void highlightUpdate(Label label, String Colour) {
@@ -140,12 +137,6 @@ public class LaneOverviewController implements Initializable, ServiceInjectable<
         sequence.play();
 
     }
- /*
-    public void showDetails(Integer laneId) {
-        mainApp.showDetails(laneId);
-    }
-
-  */
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
